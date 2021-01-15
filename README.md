@@ -56,6 +56,5 @@ $ php artisan serve
 
 You can find all tests in the `tests/` within the `Tests\` namespace.
 Run tests using the `php artisan test` or `vendor/bin/phpunit` command.
-<small>
+
 Pull-Requests get automatically built and tested by [Travis-CI](https://www.travis-ci.com).
-</small>
