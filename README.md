@@ -8,7 +8,7 @@ Built with Laravel 8, Interia.js and Vue.
 ## Setup
 
 #### Prerequisites
-- PHP ^7.3 or ^8.0
+- PHP ^7.4
 - MySQL
 
 #### Step 1
@@ -51,3 +51,11 @@ Start backend & frontend local development servers.
 ```
 $ php artisan serve
 ```
+
+## Testing
+
+You can find all tests in the `tests/` within the `Tests\` namespace.
+Run tests using the `php artisan test` or `vendor/bin/phpunit` command.
+<small>
+Pull-Requests get automatically built and tested by [Travis-CI](https://www.travis-ci.com).
+</small>
