@@ -22,11 +22,11 @@ $ npm run dev
 ```
 
 #### Step 2
-Prepare the .env file: Start by dublicating and renaming the .env.example file.
+Prepare the `.env` file: Start by dublicating and renaming the `.env.example` file.
 ```
 $ cp .env.example .env
 ```
-Setup a MySQL Database and enter the credentials in the .env file.
+Setup a MySQL database and enter the credentials in the `.env` file.
 ```
 ...
 DB_CONNECTION=mysql
@@ -40,14 +40,14 @@ DB_SOCKET=/Applications/MAMP/tmp/mysql/mysql.sock
 ```
 
 #### Step 3
-Migrate Database and optionally seed it.
+Migrate the database and optionally seed it.
 ```
 $ php artisan migrate
 $ php artisan db:seed
 ```
 
 #### Step 4
-Start backend & frontend local development servers.
+Start local development server.
 ```
 $ php artisan serve
 ```
