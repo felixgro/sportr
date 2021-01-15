@@ -18,6 +18,7 @@ beforeScript:
   - cp .env.travis .env
   - sudo mysql -e 'create database sportr;'
   - composer self-update
+  - composer update
   - composer install --no-interaction
   - php artisan key:generate
   - php artisan migrate
