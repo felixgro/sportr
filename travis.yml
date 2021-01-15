@@ -1,0 +1,26 @@
+dist: bionic
+
+language: php
+
+php:
+  - 7.3
+  - 8.0
+
+services:
+  - mysql
+
+cache:
+  directories:
+    - vendor
+    - node_modules
+
+beforeScript:
+  - cp .env.travis .env
+  - sudo mysql -e 'create database sportr;'
+  - composer self-update
+  - composer install --no-interaction
+  - php artisan key:generate
+  - php artisan migrate
+
+script:
+  - vendor/bin/phpunit
