@@ -22,7 +22,7 @@ $ npm run dev
 ```
 
 #### Step 2
-Prepare the `.env` file: Start by dublicating and renaming the `.env.example` file.
+Prepare the `.env` file: Start by duplicating and renaming the `.env.example` file.
 ```
 $ cp .env.example .env
 ```
