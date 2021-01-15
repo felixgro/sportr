@@ -1,5 +1,7 @@
 # Meet Sportr
 
+[![Build Status](https://www.travis-ci.com/felixgro/sportr.svg?branch=master)](https://www.travis-ci.com/felixgro/sportr)
+
 A clean & user-friendly sport event app for the web.
 Built with Laravel 8, Interia.js and Vue.
 
