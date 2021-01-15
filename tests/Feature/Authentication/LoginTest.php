@@ -14,6 +14,7 @@ class LoginTest extends TestCase
     /** @test */
     public function login_view_can_be_rendered()
     {
+        $this->withoutExceptionHandling();
         $this->get('/login')->assertStatus(200);
     }
 
