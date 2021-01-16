@@ -1,7 +1,4 @@
 ## Sportr Setup Guide
-
-Step-by-step guide to setting up Sportr on your local machine.
-
 #### Prerequisites:
 - PHP ^7.4
 - MySQL
