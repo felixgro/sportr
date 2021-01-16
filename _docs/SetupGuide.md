@@ -3,13 +3,13 @@
 - PHP ^7.4
 - MySQL
 
-### Step 1: Prepare Repository
+### Step 1: Install Sportr
 Clone this Repository to your machine:
 ```
 git clone https://github.com/felixgro/sportr.git
 cd sportr
 ```
-Install Composer and NPM dependencies:
+Install Composer/NPM dependencies:
 ```
 composer install
 npm install
@@ -17,6 +17,11 @@ npm install
 Compile frontend files:
 ```
 npm run dev
+```
+
+Generate an application key:
+```
+php artisan key:generate
 ```
 
 ### Step 2: Prepare `.env` file
@@ -43,16 +48,14 @@ DB_SOCKET=/path/to/mysql.sock
 ```
 
 ### Step 3: Prepare Database
-Migrate the database and optionally seed it with fake data.
+Migrate the database and seed it.
 ```
 php artisan migrate
 php artisan db:seed
 ```
 
 ### Step 4: Serve Sportr
-Start local development server.
+Boot up Laravel's local development server.
 ```
 php artisan serve
 ```
-
-Watch frontend files for changes and auto-compile accordingly via the `npm run watch` command.
