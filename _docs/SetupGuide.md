@@ -1,7 +1,9 @@
 ## Sportr Setup Guide
 #### Prerequisites:
-- PHP ^7.4
-- MySQL
+- [PHP ^7.4](https://www.php.net/downloads.php)
+- [MySQL](https://dev.mysql.com/doc/refman/8.0/en/getting-mysql.html)
+- [Git](https://git-scm.com/downloads)
+- [NPM](https://www.npmjs.com/get-npm) & [Composer](https://getcomposer.org/download/)
 
 ### Step 1: Install Sportr
 Clone this Repository to your machine:
