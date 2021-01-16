@@ -10,7 +10,18 @@ Built with Laravel 8, InteriaJs and VueJs.
 - PHP ^7.4
 - MySQL
 
-Check out the [Setup Guide](_docs/SetupGuide.md) for simple instructions on how to setup Sportr on your local machine.
+Begin by cloning this repository and install all dependencies:
+```
+git clone https://github.com/felixgro/sportr.git
+cd sportr && composer install && npm install && npm run dev
+```
+
+Start a convenient, interactive terminal setup process for Sportr:
+```
+php artisan sportr:setup
+```
+
+Check out the [Setup Guide](_docs/SetupGuide.md) for detailed instructions on how to manually setup Sportr on your machine.
 
 ## Testing
 You can find all tests in the `tests/` directory.

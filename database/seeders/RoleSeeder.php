@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
+use Facades\App\Services\RoleService;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
@@ -14,7 +15,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        foreach (config('roles.all') as $role) {
+        foreach (RoleService::getAll() as $role) {
             Role::create($role);
         }
     }
