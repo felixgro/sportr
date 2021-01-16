@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use Database\Seeders\RoleSeeder;
 use Facades\App\Services\RoleService;
 use Illuminate\Console\Command;
-use Database\Seeders\RoleSeeder;
 use Illuminate\Support\Facades\DB;
 
 class InstallCommand extends Command
@@ -69,28 +69,30 @@ class InstallCommand extends Command
     }
 
     /**
-     * Creates .env by copying .env.example
+     * Creates .env by copying .env.example.
      *
      * @return void
      */
     protected function createEnv()
     {
-        if (file_exists('.env'))
+        if (file_exists('.env')) {
             return;
+        }
 
         copy('.env.example', '.env');
         $this->line('successfully created .env file.');
     }
 
     /**
-     * Generates application key
+     * Generates application key.
      *
      * @return void
      */
     protected function generateKey()
     {
-        if (strlen(config('app.key')) !== 0)
+        if (strlen(config('app.key')) !== 0) {
             return;
+        }
 
         $this->call('key:generate');
         $this->line('successfully created secret application key.');
@@ -112,7 +114,7 @@ class InstallCommand extends Command
     }
 
     /**
-     * Update the .env with given array
+     * Update the .env with given array.
      *
      * @param array $data
      * @return void
@@ -172,8 +174,9 @@ class InstallCommand extends Command
      */
     protected function storeRoles()
     {
-        if (RoleService::isSet())
+        if (RoleService::isSet()) {
             return;
+        }
 
         app(RoleSeeder::class)->run();
         $this->info('Roles stored in database!');
