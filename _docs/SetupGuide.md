@@ -1,12 +1,12 @@
-### Sportr Setup Guide
+## Sportr Setup Guide
 
 Step-by-step guide to setting up Sportr on your local machine.
 
-##### Prerequisites:
+#### Prerequisites:
 - PHP ^7.4
 - MySQL
 
-#### Step 1: Prepare Repository
+### Step 1: Prepare Repository
 Clone this Repository to your machine:
 ```
 git clone https://github.com/felixgro/sportr.git
@@ -22,7 +22,7 @@ Compile frontend files:
 npm run dev
 ```
 
-#### Step 2: Prepare `.env` file
+### Step 2: Prepare `.env` file
 Start by duplicating and renaming the `.env.example` file:
 ```
 cp .env.example .env
@@ -45,14 +45,14 @@ DB_SOCKET=/path/to/mysql.sock
 ...
 ```
 
-#### Step 3: Prepare Database
+### Step 3: Prepare Database
 Migrate the database and optionally seed it with fake data.
 ```
 php artisan migrate
 php artisan db:seed
 ```
 
-#### Step 4: Serve Sportr
+### Step 4: Serve Sportr
 Start local development server.
 ```
 php artisan serve
