@@ -14,14 +14,14 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'sportr:install';
+    protected $signature = 'sportr:setup';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Prepares Sportr to run properly on your system.';
+    protected $description = 'Prepares Sportr to run properly on your system with your MySQL Database.';
 
     /**
      * Create a new command instance.
@@ -40,7 +40,7 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->info('>> Sportr Setup');
+        $this->info('>> Interactive Sportr Setup');
         $this->createEnv();
         $this->generateKey();
 
@@ -50,7 +50,7 @@ class InstallCommand extends Command
             $dbCreds = $this->requestDatabaseCredentials();
             $this->updateEnv($dbCreds);
         } else {
-            $this->warn('Make sure your the .env is configured correctly before migrating to your database.');
+            $this->warn('Make sure the database in your .env file is configured correctly before migrating.');
         }
 
         if ($this->confirm('Do you want to migrate the given database?', true)) {
@@ -60,12 +60,13 @@ class InstallCommand extends Command
         if ($this->databaseIsMigrated()) {
             $this->storeRoles();
         } else {
-            return $this->error('Cannot store user Roles. Looks like your database is not migrated.');
+            return $this->error('Your database needs to be migrated for the next steps.');
         }
 
         $this->call('cache:clear');
 
         $this->info('Application ready! Have fun :)');
+        $this->info("(start a development server by running 'php artisan serve')");
     }
 
     /**
