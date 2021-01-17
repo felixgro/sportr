@@ -1,92 +1,89 @@
 <template>
-    <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+    <main-layout>
+        <jet-authentication-card>
+            <template #logo>
+                <application-mark class="block h-5 w-auto" />
+            </template>
 
-        <jet-validation-errors class="mb-4" />
-
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
-        </div>
-
-        <form @submit.prevent="submit">
-            <div>
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
+            <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+                {{ status }}
             </div>
 
-            <div class="mt-4">
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
-            </div>
+            <form @submit.prevent="submit">
+                <div>
+                    <text-input label="Email" name="email" type="email" v-model="form.email" />
+                </div>
 
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <jet-checkbox name="remember" v-model="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
-                </label>
-            </div>
+                <div class="mt-4">
+                    <text-input label="Password" name="password" type="password" v-model="form.password" />
+                </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <inertia-link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Forgot your password?
-                </inertia-link>
+                <div class="mt-4">
+                    <checkbox name="remember" v-model="form.remember">
+                        Remember me
+                    </checkbox>
+                </div>
 
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Login
-                </jet-button>
-            </div>
-        </form>
-    </jet-authentication-card>
+                <div class="flex items-center justify-end mt-4">
+                    <inertia-link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                        Forgot your password?
+                    </inertia-link>
+
+                    <submit-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Login
+                    </submit-button>
+                </div>
+            </form>
+        </jet-authentication-card>
+    </main-layout>
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetCheckbox from '@/Jetstream/Checkbox'
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
+import MainLayout from '@/Layouts/MainLayout'
+import ApplicationMark from '@/Components/Main/ApplicationMark'
+import TextInput from '@/Components/Form/TextInput'
+import Checkbox from '@/Components/Form/Checkbox'
+import SubmitButton from '@/Components/Form/Button'
 
-    export default {
-        components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetCheckbox,
-            JetLabel,
-            JetValidationErrors
-        },
+import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
 
-        props: {
-            canResetPassword: Boolean,
-            status: String
-        },
+export default {
+    components: {
+        MainLayout,
+        ApplicationMark,
+        TextInput,
+        Checkbox,
+        SubmitButton,
+        JetAuthenticationCard,
+    },
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    email: '',
-                    password: '',
-                    remember: false
+    props: {
+        canResetPassword: Boolean,
+        status: String
+    },
+
+    data() {
+        return {
+            test: 'test',
+            form: this.$inertia.form({
+                email: '',
+                password: '',
+                remember: false
+            })
+        }
+    },
+
+    methods: {
+        submit() {
+            this.form
+                .transform(data => ({
+                    ... data,
+                    remember: this.form.remember ? 'on' : ''
+                }))
+                .post(this.route('login'), {
+                    onFinish: () => this.form.reset('password'),
                 })
-            }
-        },
-
-        methods: {
-            submit() {
-                this.form
-                    .transform(data => ({
-                        ... data,
-                        remember: this.form.remember ? 'on' : ''
-                    }))
-                    .post(this.route('login'), {
-                        onFinish: () => this.form.reset('password'),
-                    })
-            }
         }
     }
+}
 </script>
