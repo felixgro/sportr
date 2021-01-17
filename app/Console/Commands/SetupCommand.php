@@ -7,7 +7,7 @@ use Facades\App\Services\RoleService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class InstallCommand extends Command
+class SetupCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -65,8 +65,8 @@ class InstallCommand extends Command
 
         $this->call('cache:clear');
 
-        $this->info('Application ready! Have fun :)');
-        $this->info("(start a development server by running 'php artisan serve')");
+        $this->info('Sportr is ready! Have fun :)');
+        $this->info("(run `php artisan serve` to start the development server)");
     }
 
     /**
@@ -81,7 +81,7 @@ class InstallCommand extends Command
         }
 
         copy('.env.example', '.env');
-        $this->line('successfully created .env file.');
+        $this->info('.env created successfully.');
     }
 
     /**
@@ -96,7 +96,6 @@ class InstallCommand extends Command
         }
 
         $this->call('key:generate');
-        $this->line('successfully created secret application key.');
     }
 
     /**
