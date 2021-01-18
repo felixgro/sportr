@@ -29219,7 +29219,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "bg-gray-50 text-gray-300 focus-within:text-gray-600 relative w-full sm:w-3/4 mx-auto flex align-middle transition duration-75 ease-out\n\ttransform translate-y-1/2 rounded-lg shadow-xl border-2 border-gray-200 px-5"
+        "bg-gray-50 text-gray-300 focus-within:text-gray-600 relative w-full sm:w-3/4 mx-auto flex align-middle transition duration-75 ease-out\n\ttransform translate-y-1/2 rounded-lg shadow-md focus-within:shadow-lg border-2 border-gray-200 px-5"
     },
     [
       _c(
