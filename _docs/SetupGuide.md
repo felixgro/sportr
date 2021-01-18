@@ -1,12 +1,10 @@
 ## Sportr Setup Guide
 #### Prerequisites:
-- [PHP ^7.4](https://www.php.net/downloads.php)
-- [MySQL](https://dev.mysql.com/doc/refman/8.0/en/getting-mysql.html)
-- [Composer](https://getcomposer.org/download/)
-- [NPM](https://www.npmjs.com/get-npm)
-- [Git](https://git-scm.com/downloads)
+- [PHP ^\^7.4/\^8.0^](https://www.php.net/downloads.php)
+- [MySQL ^\^5.7/\^8.0^](https://dev.mysql.com/doc/refman/8.0/en/getting-mysql.html)
+- [Composer](https://getcomposer.org/download/), [NPM](https://www.npmjs.com/get-npm)
 
-### Step 1: Install Sportr
+### Step 1: Install Sportr with dependencies
 Clone this Repository to your machine:
 ```
 git clone https://github.com/felixgro/sportr.git
@@ -17,14 +15,13 @@ Install Composer/NPM dependencies:
 composer install
 npm install
 ```
-Compile frontend files:
-```
-npm run dev
-```
-
 Generate an application key:
 ```
 php artisan key:generate
+```
+Compile frontend files:
+```
+npm run dev
 ```
 
 ### Step 2: Prepare `.env` file
@@ -51,14 +48,16 @@ DB_SOCKET=/path/to/mysql.sock
 ```
 
 ### Step 3: Prepare Database
-Migrate the database and seed it.
+Migrate the database and seed it with essential data.
 ```
 php artisan migrate
 php artisan db:seed
 ```
 
 ### Step 4: Serve Sportr
-Boot up Laravel's local development server.
+Boot up local development server:
 ```
 php artisan serve
 ```
+
+..or use [Laravel Valet](https://laravel.com/docs/8.x/valet) to serve the app on `http://sportr.test`.

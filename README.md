@@ -7,18 +7,22 @@ Built with Laravel 8, InteriaJs and VueJs.
 
 ## Setup
 ##### Prerequisites:
-- PHP ^7.4
-- MySQL
+- PHP ^7.4, ^8.0
+- MySQL ^5.7, ^8.0
+- Composer, NPM
 
-Begin by cloning this repository and install all dependencies:
+1.  Begin by cloning this repository and install all dependencies:
 ```
 git clone https://github.com/felixgro/sportr.git
 cd sportr && composer install && npm install && npm run dev
 ```
-
-Start a convenient, interactive terminal setup process for Sportr:
+2. Start a convenient terminal setup process:
 ```
 php artisan sportr:setup
+```
+3. Serve Sportr using [Laravel Valet](https://laravel.com/docs/8.x/valet) or run:
+```
+php artisan serve
 ```
 
 Check out the [Setup Guide](_docs/SetupGuide.md) for detailed instructions on how to manually setup Sportr on your machine.
