@@ -15,10 +15,6 @@ Install Composer/NPM dependencies:
 composer install
 npm install
 ```
-Generate an application key:
-```
-php artisan key:generate
-```
 Compile frontend files:
 ```
 npm run dev
@@ -45,6 +41,10 @@ If you receive a `SQLSTATE[HY000] [2002]` error while migrating the database you
 ...
 DB_SOCKET=/path/to/mysql.sock
 ...
+```
+Generate an application key:
+```
+php artisan key:generate
 ```
 
 ### Step 3: Prepare Database
