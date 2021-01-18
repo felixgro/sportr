@@ -1,68 +1,66 @@
 <template>
-    <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+    <main-layout>
+        <jet-authentication-card>
+            <template #logo>
+                <application-mark class="block h-5 w-auto" />
+            </template>
 
-        <div class="mb-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
-        </div>
-
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
-        </div>
-
-        <jet-validation-errors class="mb-4" />
-
-        <form @submit.prevent="submit">
-            <div>
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
+            <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+                {{ status }}
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Email Password Reset Link
-                </jet-button>
+            <div class="mb-4 text-sm text-gray-600">
+                Forgot your password? No problem. Just let us know your email address and we will email
+                you a password reset link that will allow you to choose a new one.
             </div>
-        </form>
-    </jet-authentication-card>
+
+            <form @submit.prevent="submit">
+                <div>
+                    <text-input label="Email" name="email" type="email" v-model="form.email" />
+                </div>
+
+                <div class="flex items-center justify-end mt-4">
+                    <submit-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Email Password Reset Link
+                    </submit-button>
+                </div>
+            </form>
+        </jet-authentication-card>
+    </main-layout>
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
+import MainLayout from '@/Layouts/MainLayout'
+import ApplicationMark from '@/Components/Main/ApplicationMark'
+import TextInput from '@/Components/Form/TextInput'
+import SubmitButton from '@/Components/Form/Button'
+import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
 
-    export default {
-        components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetLabel,
-            JetValidationErrors
-        },
+export default {
+    components: {
+        MainLayout,
+        ApplicationMark,
+        TextInput,
+        SubmitButton,
+        JetAuthenticationCard,
+    },
 
-        props: {
-            status: String
-        },
+    props: {
+        status: String
+    },
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    email: ''
-                })
-            }
-        },
+    data() {
+        return {
+            form: this.$inertia.form({
+                email: ''
+            })
+        }
+    },
 
-        methods: {
-            submit() {
-                this.form.post(this.route('password.email'))
-            }
+    methods: {
+        submit() {
+            this.form.post(this.route('password.email'))
         }
     }
+}
 </script>
