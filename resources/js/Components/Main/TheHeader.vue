@@ -1,27 +1,25 @@
 <template>
-	<header class="bg-white border-b border-gray-100">
+	<header class="bg-gray-50 border-b border-none shadow-md">
 
-		<!-- Main Navigation -->
 		<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+			<!-- Top Section -->
 			<div class="flex justify-between h-16">
 
 				<!-- Left Section -->
 				<div class="flex items-center">
-
 					<!-- Sportr Logo -->
 					<div class="flex-shrink-0 flex items-center">
 						<inertia-link :href="route('home')">
 							<application-mark class="block h-5 w-auto" />
 						</inertia-link>
 					</div>
-
 					<!-- Desktop Navigation Links -->
 					<div class="hidden space-x-4 sm:ml-10 sm:flex">
 						<nav-link v-for="item in navItems" :key="item.route" :toRoute="item.route">
 							{{ item.title }}
 						</nav-link>
 					</div>
-
 				</div>
 
 				<!-- Desktop Right Section -->
@@ -71,6 +69,8 @@
 					</div>
 				</div>
 			</div>
+			<!-- Bottom Section -->
+			<the-searchbar />
 		</nav>
 	</header>
 </template>
@@ -78,6 +78,7 @@
 <script>
 import ApplicationMark from '@/Components/Main/ApplicationMark'
 import NavLink from '@/Components/NavLink'
+import TheSearchbar from '@/Components/Main/TheSearchbar'
 import Dropdown from '@/Components/Dropdown'
 
 import { mainNavigationItems } from '@/config/navigation.js'
@@ -89,11 +90,17 @@ export default {
 		NavLink,
 		ApplicationMark,
 		Dropdown,
+		TheSearchbar,
 		JetDropdownLink
 	},
 	data() {
 		return {
 			navItems: mainNavigationItems
+		}
+	},
+	methods: {
+		logout() {
+			this.$inertia.post(route('logout'))
 		}
 	}
 }
