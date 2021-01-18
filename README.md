@@ -20,7 +20,7 @@ cd sportr && composer install && npm install && npm run dev
 ```
 php artisan sportr:setup
 ```
-3. Serve Sportr using [Laravel Valet](https://laravel.com/docs/8.x/valet) or run:
+3. Serve Sportr using [Valet](https://laravel.com/docs/8.x/valet) or run:
 ```
 php artisan serve
 ```
