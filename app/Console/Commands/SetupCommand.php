@@ -107,7 +107,7 @@ class SetupCommand extends Command
     {
         return [
             'DB_DATABASE' => $this->ask('Database name', 'sportr'),
-            'DB_PORT' => $this->ask('Database port', 3307),
+            'DB_PORT' => $this->ask('Database port', 3306),
             'DB_USERNAME' => $this->ask('Database user', 'root'),
             'DB_PASSWORD' => $this->ask('Database password (leave blank for no password)'),
         ];
