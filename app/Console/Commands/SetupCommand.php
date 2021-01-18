@@ -66,7 +66,6 @@ class SetupCommand extends Command
         $this->call('cache:clear');
 
         $this->info('Sportr is ready! Have fun :)');
-        $this->info('(run `php artisan serve` to start the development server)');
     }
 
     /**
