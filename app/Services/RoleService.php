@@ -24,7 +24,7 @@ class RoleService
      */
     public function isReady()
     {
-        return !Role::all()->isEmpty();
+        return ! Role::all()->isEmpty();
     }
 
     /**
@@ -38,7 +38,7 @@ class RoleService
     }
 
     /**
-     * Get value of given key from config/roles.php
+     * Get value of given key from config/roles.php.
      *
      * @param string $key
      * @return mixed
