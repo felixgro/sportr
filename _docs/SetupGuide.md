@@ -57,4 +57,4 @@ php artisan serve
 ..or use [Laravel Valet](https://laravel.com/docs/8.x/valet) to serve the app on `http://sportr.test`.
 
 ## Having Troubles ?
-Check out the [Troubleshootings](Troubleshooting.md) or send a mail to [me@felixgrohs.at](mailto:me@felixgrohs.at)
+Check out the [Troubleshootings](Troubleshooting.md) or send a mail to [me@felixgrohs.at](mailto:me@felixgrohs.at).
