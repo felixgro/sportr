@@ -3,17 +3,17 @@
 namespace Tests\Feature\Authentication;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Facades\Tests\Setup\UserSetup;
 use Tests\TestCase;
 
 class DeleteAccountTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function user_accounts_can_be_deleted()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = UserSetup::create();
+
+        $this->actingAs($user);
 
         $this->delete('/user', [
             'password' => 'password',
@@ -23,9 +23,11 @@ class DeleteAccountTest extends TestCase
     }
 
     /** @test */
-    public function test_correct_password_must_be_provided()
+    public function correct_password_must_be_provided()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = UserSetup::create();
+
+        $this->actingAs($user);
 
         $this->delete('/user', [
             'password' => 'wrong-password',

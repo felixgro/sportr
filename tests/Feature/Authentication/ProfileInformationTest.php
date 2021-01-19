@@ -2,25 +2,24 @@
 
 namespace Tests\Feature\Authentication;
 
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Facades\Tests\Setup\UserSetup;
 use Tests\TestCase;
 
 class ProfileInformationTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function profile_information_can_be_updated()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = UserSetup::create();
+        $newData = UserSetup::raw();
 
-        $this->put('/user/profile-information', [
-            'name' => 'Test Name',
-            'email' => 'test@example.com',
-        ]);
+        $this->actingAs($user)
+            ->put('/user/profile-information', [
+                'name' => $newData['name'],
+                'email' => $newData['email'],
+            ]);
 
-        $this->assertEquals('Test Name', $user->fresh()->name);
-        $this->assertEquals('test@example.com', $user->fresh()->email);
+        $this->assertEquals($newData['name'], $user->fresh()->name);
+        $this->assertEquals($newData['email'], $user->fresh()->email);
     }
 }

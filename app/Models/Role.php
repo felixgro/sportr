@@ -6,9 +6,40 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'inherit',
+        'permissions',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'permissions' => 'array',
+    ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
-    public $fillable = [
-        'title'
-    ];
+    /**
+     * Get all users with the current role.
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

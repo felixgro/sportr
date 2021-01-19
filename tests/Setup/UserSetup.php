@@ -3,26 +3,48 @@
 namespace Tests\Setup;
 
 use App\Models\User;
-use Laravel\Jetstream\Rules\Role;
+use Facades\App\Services\RoleService;
+use Illuminate\Support\Facades\Hash;
 
 class UserSetup
 {
-	private $attr;
+	private $attributes = [];
 
-	public function __construct()
+	public function create()
 	{
-		//
+		return User::factory()->create($this->attributes);
 	}
 
-	public static function create($attr = [])
+	public function raw()
 	{
-		$usr = User::factory()->create($attr);
-
-		return $usr;
+		return User::factory()->raw($this->attributes);
 	}
 
-	public function assignRole(Role $role)
+	public function withName(string $name)
 	{
+		$this->attributes['name'] = $name;
+
+		return $this;
+	}
+
+	public function withEmail(string $email)
+	{
+		$this->attributes['email'] = $email;
+
+		return $this;
+	}
+
+	public function withPassword(string $password)
+	{
+		$this->attributes['password'] = Hash::make($password);
+
+		return $this;
+	}
+
+	public function withRole(string $role)
+	{
+		$this->attributes['role_id'] = RoleService::get($role)->id;
+
 		return $this;
 	}
 }

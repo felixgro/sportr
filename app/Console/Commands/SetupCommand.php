@@ -2,10 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Database\Seeders\RoleSeeder;
-use Facades\App\Services\RoleService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
+use Database\Seeders\RoleSeeder;
 
 class SetupCommand extends Command
 {
@@ -163,7 +161,7 @@ class SetupCommand extends Command
      */
     protected function databaseIsMigrated()
     {
-        return DB::table('migrations')->where('migration', '2021_01_15_193742_create_roles_table')->exists();
+        return \DB::table('migrations')->where('migration', '2020_01_15_193742_create_roles_table')->exists();
     }
 
     /**
@@ -173,11 +171,8 @@ class SetupCommand extends Command
      */
     protected function storeRoles()
     {
-        if (RoleService::isSet()) {
-            return;
+        if (app(RoleSeeder::class)->run()) {
+            $this->info('Roles stored successfully!');
         }
-
-        app(RoleSeeder::class)->run();
-        $this->info('Roles stored in database!');
     }
 }

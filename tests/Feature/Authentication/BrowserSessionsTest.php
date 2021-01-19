@@ -2,18 +2,17 @@
 
 namespace Tests\Feature\Authentication;
 
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Facades\Tests\Setup\UserSetup;
 use Tests\TestCase;
 
 class BrowserSessionsTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function other_browser_sessions_can_be_logged_out()
     {
-        $this->actingAs(User::factory()->create());
+        $user = UserSetup::create();
+
+        $this->actingAs($user);
 
         $this->delete('/user/other-browser-sessions', [
             'password' => 'password',
