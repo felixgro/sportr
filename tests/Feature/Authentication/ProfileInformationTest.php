@@ -10,16 +10,16 @@ class ProfileInformationTest extends TestCase
     /** @test */
     public function profile_information_can_be_updated()
     {
-        $user = UserSetup::create();
-        $newData = UserSetup::raw();
+        $user = $this->signIn();
 
-        $this->actingAs($user)
-            ->put('/user/profile-information', [
-                'name' => $newData['name'],
-                'email' => $newData['email'],
-            ]);
+        $updatedData = UserSetup::raw();
 
-        $this->assertEquals($newData['name'], $user->fresh()->name);
-        $this->assertEquals($newData['email'], $user->fresh()->email);
+        $this->put('/user/profile-information', [
+            'name' => $updatedData['name'],
+            'email' => $updatedData['email'],
+        ]);
+
+        $this->assertEquals($updatedData['name'], $user->fresh()->name);
+        $this->assertEquals($updatedData['email'], $user->fresh()->email);
     }
 }

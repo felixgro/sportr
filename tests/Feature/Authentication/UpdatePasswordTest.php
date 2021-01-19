@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\Authentication;
 
-use App\Models\User;
-use Facades\Tests\Setup\UserSetup;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
@@ -12,7 +10,7 @@ class UpdatePasswordTest extends TestCase
     /** @test */
     public function password_can_be_updated()
     {
-        $this->actingAs($user = UserSetup::create());
+        $user = $this->signIn();
 
         $this->put('/user/password', [
             'current_password' => 'password',
@@ -26,7 +24,7 @@ class UpdatePasswordTest extends TestCase
     /** @test */
     public function current_password_must_be_correct()
     {
-        $this->actingAs($user = UserSetup::create());
+        $this->signIn();
 
         $this->put('/user/password', [
             'current_password' => 'wrong-password',

@@ -5,7 +5,6 @@ namespace Tests\Feature\Authentication;
 use App\Providers\RouteServiceProvider;
 use Facades\App\Services\RoleService;
 use Facades\Tests\Setup\UserSetup;
-use App\Models\User;
 use Tests\TestCase;
 
 class RegistrationTest extends TestCase
@@ -19,11 +18,11 @@ class RegistrationTest extends TestCase
     /** @test */
     public function new_user_can_register()
     {
-        $data = UserSetup::raw();
+        $userData = UserSetup::raw();
 
         $this->post('/register', [
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name' => $userData['name'],
+            'email' => $userData['email'],
             'password' => 'password',
             'terms' => true,
         ])->assertRedirect(RouteServiceProvider::HOME);
@@ -34,16 +33,16 @@ class RegistrationTest extends TestCase
     /** @test */
     public function new_user_gets_default_role()
     {
-        $data = UserSetup::raw();
+        $userData = UserSetup::raw();
 
         $this->post('/register', [
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name' => $userData['name'],
+            'email' => $userData['email'],
             'password' => 'password',
             'terms' => true,
         ]);
 
-        $user = User::where('email', $data['email'])->first();
+        $user = UserSetup::getExisting($userData['email']);
 
         $this->assertEquals(RoleService::getDefault()->id, $user->role_id);
     }
@@ -51,11 +50,11 @@ class RegistrationTest extends TestCase
     /** @test */
     public function user_has_to_accept_terms()
     {
-        $data = UserSetup::raw();
+        $userData = UserSetup::raw();
 
         $this->post('/register', [
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name' => $userData['name'],
+            'email' => $userData['email'],
             'password' => 'password'
         ])->assertSessionHasErrors(['terms']);
     }
