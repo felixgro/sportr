@@ -36,12 +36,6 @@ DB_USERNAME=root
 DB_PASSWORD=
 ...
 ```
-If you receive a `SQLSTATE[HY000] [2002]` error while migrating the database you might also have to specify the path to your local MySQL Socket file:
-```
-...
-DB_SOCKET=/path/to/mysql.sock
-...
-```
 Generate an application key:
 ```
 php artisan key:generate
@@ -61,3 +55,6 @@ php artisan serve
 ```
 
 ..or use [Laravel Valet](https://laravel.com/docs/8.x/valet) to serve the app on `http://sportr.test`.
+
+## Having Troubles ?
+Check out the [Troubleshootings](Troubleshooting.md) or send a mail to [me@felixgrohs.at](mailto:me@felixgrohs.at)
