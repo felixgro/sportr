@@ -2,14 +2,14 @@
 
 namespace Tests\Extensions;
 
-use Illuminate\Support\Facades\File;
 use PHPUnit\Runner\{BeforeFirstTestHook, AfterLastTestHook};
 
 final class TestListener implements BeforeFirstTestHook, AfterLastTestHook
 {
 	/**
-	 * Migrate & seed testing database before running.
+	 * Migrate & seed testing database before running tests.
 	 *
+	 * @return void
 	 */
 	public function executeBeforeFirstTest(): void
 	{
@@ -20,9 +20,10 @@ final class TestListener implements BeforeFirstTestHook, AfterLastTestHook
 	/**
 	 * Reset testing database when done.
 	 *
+	 * @return void
 	 */
 	public function executeAfterLastTest(): void
 	{
-		shell_exec('php artisan migrate:reset');
+		shell_exec('php artisan migrate:reset --env=testing');
 	}
 }

@@ -3,14 +3,13 @@
 namespace Tests\Feature\Authentication;
 
 use Tests\TestCase;
-use Facades\Tests\Setup\UserSetup;
 
 class TwoFactorAuthenticationSettingsTest extends TestCase
 {
     /** @test */
     public function two_factor_authentication_can_be_enabled()
     {
-        $this->actingAs($user = UserSetup::create());
+        $user = $this->signIn();
 
         $this->withSession(['auth.password_confirmed_at' => time()])
             ->post('/user/two-factor-authentication');
@@ -22,7 +21,7 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
     /** @test */
     public function recovery_codes_can_be_regenerated()
     {
-        $this->actingAs($user = UserSetup::create());
+        $user = $this->signIn();
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
 
@@ -40,7 +39,7 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
     /** @test */
     public function two_factor_authentication_can_be_disabled()
     {
-        $this->actingAs($user = UserSetup::create());
+        $user = $this->signIn();
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
 
