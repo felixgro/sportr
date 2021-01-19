@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Database\Seeders\RoleSeeder;
+use Illuminate\Console\Command;
 
 class SetupCommand extends Command
 {
