@@ -15,9 +15,8 @@ cache:
     - node_modules
 
 beforeScript:
-  - cp .env.travis .env
-  - sudo mysql -e 'create database sportr;'
+  - cp .env.testing .env
+  - sudo mysql -e 'create database sportr_test;'
   - composer self-update
   - composer install --no-interaction
   - php artisan key:generate
-  - php artisan migrate

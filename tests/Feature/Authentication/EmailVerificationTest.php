@@ -4,20 +4,23 @@ namespace Tests\Feature\Authentication;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Facades\Tests\Setup\UserSetup;
 use Illuminate\Auth\Events\Verified;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
 class EmailVerificationTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function email_verification_view_can_be_rendered()
     {
-        $this->actingAs(User::factory()->create(['email_verified_at' => null]));
+        $user = UserSetup::create();
+
+        $user->email_verified_at = null;
+        $user->save();
+
+        $this->actingAs($user);
 
         $this->get('/email/verify')->assertStatus(200);
     }

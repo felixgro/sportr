@@ -14,8 +14,10 @@ class DeleteUser implements DeletesUsers
      */
     public function delete($user)
     {
-        $user->deleteProfilePhoto();
-        $user->tokens->each->delete();
+        if ($user->tokens) {
+            $user->tokens->each->delete();
+        }
+
         $user->delete();
     }
 }

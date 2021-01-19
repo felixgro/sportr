@@ -11,12 +11,23 @@ class RoleSeeder extends Seeder
     /**
      * Store Roles in Database.
      *
-     * @return void
+     * @return bool
      */
-    public function run()
+    public function run(): bool
     {
-        foreach (RoleService::getAll() as $role) {
-            Role::create($role);
+        // Check if roles are already stored
+        if (RoleService::isReady()) {
+            return false;
         }
+
+        foreach (RoleService::config('all') as $r) {
+            Role::create([
+                'title' => $r['role'],
+                'permissions' => $r['permissions'],
+                'inherit' => $r['inherit'] ?? null
+            ]);
+        }
+
+        return true;
     }
 }
