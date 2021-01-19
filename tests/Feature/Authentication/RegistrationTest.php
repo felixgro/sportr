@@ -3,7 +3,9 @@
 namespace Tests\Feature\Authentication;
 
 use App\Providers\RouteServiceProvider;
+use Facades\App\Services\RoleService;
 use Facades\Tests\Setup\UserSetup;
+use App\Models\User;
 use Tests\TestCase;
 
 class RegistrationTest extends TestCase
@@ -27,6 +29,23 @@ class RegistrationTest extends TestCase
         ])->assertRedirect(RouteServiceProvider::HOME);
 
         $this->assertAuthenticated();
+    }
+
+    /** @test */
+    public function new_user_gets_default_role()
+    {
+        $data = UserSetup::raw();
+
+        $this->post('/register', [
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => 'password',
+            'terms' => true,
+        ]);
+
+        $user = User::where('email', $data['email'])->first();
+
+        $this->assertEquals(RoleService::getDefault()->id, $user->role_id);
     }
 
     /** @test */
