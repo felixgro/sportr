@@ -24,6 +24,6 @@ final class TestListener implements BeforeFirstTestHook, AfterLastTestHook
 	 */
 	public function executeAfterLastTest(): void
 	{
-		shell_exec('php artisan migrate:reset');
+		shell_exec('php artisan migrate:reset --env=testing');
 	}
 }
