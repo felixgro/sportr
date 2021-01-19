@@ -7,8 +7,8 @@ Built with Laravel 8, InteriaJs and VueJs.
 
 ## Setup
 ##### Prerequisites:
-- PHP ^7.4, ^8.0
-- MySQL ^5.7, ^8.0
+- PHP 7.4, 8.x
+- MySQL 5.7, 8.x
 - Composer, NPM
 
 1.  Begin by cloning this repository and install all dependencies:
