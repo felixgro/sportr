@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 Route::get('/test', function () {
     Gate::allows('view-desktop');
+
     return Inertia::render('Test');
 })->name('test');
 
