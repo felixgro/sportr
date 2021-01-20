@@ -31,11 +31,12 @@ return [
         ],
         [
             'role' => 'moderator',
-            'permissions' => ['edit-event']
+            'permissions' => ['edit-event'],
+            'inherit' => 'user'
         ],
         [
             'role' => 'admin',
-            'permissions' => ['delete-event', 'edit-roles'],
+            'permissions' => ['delete-event', 'edit-roles', 'view-dashboard'],
             'inherit' => 'moderator'
         ]
     ]
