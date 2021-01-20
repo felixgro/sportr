@@ -52,8 +52,9 @@ class Role extends Model
      */
     public function hasPermission(string $permission)
     {
-        if (in_array($permission, $this->permissions))
+        if (in_array($permission, $this->permissions)) {
             return true;
+        }
 
         if ($this->inherit) {
             // Recursive search for parent roles
