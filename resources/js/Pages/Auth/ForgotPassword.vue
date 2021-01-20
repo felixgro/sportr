@@ -2,7 +2,7 @@
     <main-layout>
         <jet-authentication-card>
             <template #logo>
-                <application-mark class="block h-5 w-auto" />
+                <the-logo class="block h-5 w-auto" />
             </template>
 
             <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -31,7 +31,7 @@
 
 <script>
 import MainLayout from '@/Layouts/MainLayout'
-import ApplicationMark from '@/Components/Main/ApplicationMark'
+import TheLogo from '@/Components/Main/TheLogo'
 import TextInput from '@/Components/Form/Input'
 import SubmitButton from '@/Components/Form/Button'
 import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
@@ -39,7 +39,7 @@ import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
 export default {
     components: {
         MainLayout,
-        ApplicationMark,
+        TheLogo,
         TextInput,
         SubmitButton,
         JetAuthenticationCard,

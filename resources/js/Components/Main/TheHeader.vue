@@ -11,7 +11,7 @@
 					<!-- Sportr Logo -->
 					<div class="flex-shrink-0 flex items-center">
 						<inertia-link :href="route('home')">
-							<application-mark class="block h-5 w-auto" />
+							<the-logo class="block h-5 w-auto" />
 						</inertia-link>
 					</div>
 					<!-- Desktop Navigation Links -->
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import ApplicationMark from '@/Components/Main/ApplicationMark'
+import TheLogo from '@/Components/Main/TheLogo'
 import NavLink from '@/Components/NavLink'
 import TheSearchbar from '@/Components/Main/TheSearchbar'
 import Dropdown from '@/Components/Dropdown'
@@ -88,7 +88,7 @@ import JetDropdownLink from '@/Jetstream/DropdownLink'
 export default {
 	components: {
 		NavLink,
-		ApplicationMark,
+		TheLogo,
 		Dropdown,
 		TheSearchbar,
 		JetDropdownLink
