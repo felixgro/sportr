@@ -1,5 +1,5 @@
 <template>
-    <jet-action-section>
+    <action-section>
         <template #title>
             Two Factor Authentication
         </template>
@@ -19,7 +19,9 @@
 
             <div class="mt-3 max-w-xl text-sm text-gray-600">
                 <p>
-                    When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.
+                    When two factor authentication is enabled, you will be prompted for a secure,
+                    random token during authentication. You may retrieve this token from your
+                    phone's Google Authenticator application.
                 </p>
             </div>
 
@@ -49,57 +51,62 @@
                     </div>
                 </div>
             </div>
+        </template>
+        <template #actions>
+            <div v-if="! twoFactorEnabled">
+                <jet-confirms-password title="Enable two factor authentication" @confirmed="enableTwoFactorAuthentication">
+                    <submit-button type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
+                        Enable
+                    </submit-button>
+                </jet-confirms-password>
+            </div>
 
-            <div class="mt-5">
-                <div v-if="! twoFactorEnabled">
-                    <jet-confirms-password @confirmed="enableTwoFactorAuthentication">
-                        <jet-button type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
-                            Enable
-                        </jet-button>
-                    </jet-confirms-password>
-                </div>
+            <div v-else>
+                <jet-confirms-password @confirmed="regenerateRecoveryCodes">
+                    <secondary-button class="mr-3"
+                                    v-if="recoveryCodes.length > 0">
+                        Regenerate Recovery Codes
+                    </secondary-button>
+                </jet-confirms-password>
 
-                <div v-else>
-                    <jet-confirms-password @confirmed="regenerateRecoveryCodes">
-                        <jet-secondary-button class="mr-3"
-                                        v-if="recoveryCodes.length > 0">
-                            Regenerate Recovery Codes
-                        </jet-secondary-button>
-                    </jet-confirms-password>
+                <jet-confirms-password @confirmed="showRecoveryCodes">
+                    <secondary-button class="mr-3" v-if="recoveryCodes.length === 0">
+                        Show Recovery Codes
+                    </secondary-button>
+                </jet-confirms-password>
 
-                    <jet-confirms-password @confirmed="showRecoveryCodes">
-                        <jet-secondary-button class="mr-3" v-if="recoveryCodes.length === 0">
-                            Show Recovery Codes
-                        </jet-secondary-button>
-                    </jet-confirms-password>
-
-                    <jet-confirms-password @confirmed="disableTwoFactorAuthentication">
-                        <jet-danger-button
-                                        :class="{ 'opacity-25': disabling }"
-                                        :disabled="disabling">
-                            Disable
-                        </jet-danger-button>
-                    </jet-confirms-password>
-                </div>
+                <jet-confirms-password @confirmed="disableTwoFactorAuthentication">
+                    <jet-danger-button
+                                    :class="{ 'opacity-25': disabling }"
+                                    :disabled="disabling">
+                        Disable
+                    </jet-danger-button>
+                </jet-confirms-password>
             </div>
         </template>
-    </jet-action-section>
+    </action-section>
 </template>
 
 <script>
-    import JetActionSection from '@/Jetstream/ActionSection'
-    import JetButton from '@/Jetstream/Button'
-    import JetConfirmsPassword from '@/Jetstream/ConfirmsPassword'
-    import JetDangerButton from '@/Jetstream/DangerButton'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+import TextInput from '@/Components/Form/Input'
+import SubmitButton from '@/Components/Form/Button'
+import JetButton from '@/Jetstream/Button'
+import ActionSection from '@/Components/Sections/ActionSection'
+import JetConfirmsPassword from '@/Jetstream/ConfirmsPassword'
+import JetDangerButton from '@/Jetstream/DangerButton'
+import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+
+import SecondaryButton from '@/Components/Form/ButtonSecondary'
 
     export default {
         components: {
-            JetActionSection,
+            ActionSection,
+            SubmitButton,
             JetButton,
             JetConfirmsPassword,
             JetDangerButton,
             JetSecondaryButton,
+            SecondaryButton
         },
 
         data() {

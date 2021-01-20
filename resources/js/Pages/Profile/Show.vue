@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <main-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Profile
@@ -7,7 +7,7 @@
         </template>
 
         <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            <div class="py-10 w-full md:w-3/4 lg:w-2/3 mx-auto">
                 <div v-if="$page.props.jetstream.canUpdateProfileInformation">
                     <update-profile-information-form :user="$page.props.user" />
 
@@ -35,29 +35,29 @@
                 </template>
             </div>
         </div>
-    </app-layout>
+    </main-layout>
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout'
-    import DeleteUserForm from './DeleteUserForm'
-    import JetSectionBorder from '@/Jetstream/SectionBorder'
-    import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm'
-    import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
-    import UpdatePasswordForm from './UpdatePasswordForm'
-    import UpdateProfileInformationForm from './UpdateProfileInformationForm'
+import MainLayout from '@/Layouts/MainLayout'
+import DeleteUserForm from './DeleteUserForm'
+import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm'
+import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
+import UpdatePasswordForm from './UpdatePasswordForm'
+import UpdateProfileInformationForm from './UpdateProfileInformationForm'
+import JetSectionBorder from '@/Jetstream/SectionBorder'
 
-    export default {
-        props: ['sessions'],
+export default {
+    props: ['sessions'],
 
-        components: {
-            AppLayout,
-            DeleteUserForm,
-            JetSectionBorder,
-            LogoutOtherBrowserSessionsForm,
-            TwoFactorAuthenticationForm,
-            UpdatePasswordForm,
-            UpdateProfileInformationForm,
-        },
-    }
+    components: {
+        MainLayout,
+        DeleteUserForm,
+        JetSectionBorder,
+        LogoutOtherBrowserSessionsForm,
+        TwoFactorAuthenticationForm,
+        UpdatePasswordForm,
+        UpdateProfileInformationForm,
+    },
+}
 </script>

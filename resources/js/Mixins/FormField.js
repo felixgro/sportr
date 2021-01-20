@@ -2,15 +2,26 @@ export default {
 	props: {
 		name: {
             type: String,
-            required: true
-        }
+            required: false
+		},
+		errorBag: {
+			type: String,
+			default: 'default'
+		}
 	},
 	computed: {
+		id() {
+			return this._props.name && `id_${this._uid}`
+		},
 		hasError() {
-			return (this.name in this.$page.props.errors)
+			if (this.$page.props.errorBags.hasOwnProperty(this.errorBag)) {
+				return (this.name in this.$page.props.errorBags[this.errorBag])
+			}
+
+			return false
 		},
 		getError() {
-			return this.$page.props.errors[this.name]
-		}
+			return this.$page.props.errorBags[this.errorBag][this.name][0]
+		},
 	}
 }

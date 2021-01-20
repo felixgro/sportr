@@ -1,10 +1,6 @@
 <template>
     <main-layout>
-        <jet-authentication-card>
-            <template #logo>
-                <application-mark class="block h-5 w-auto" />
-            </template>
-
+        <authentication-card title="Welcome back!">
             <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
                 {{ status }}
             </div>
@@ -24,7 +20,7 @@
                     </checkbox>
                 </div>
 
-                <div class="flex items-center justify-end mt-4">
+                <div class="flex items-center justify-end mt-6">
                     <inertia-link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
                         Forgot your password?
                     </inertia-link>
@@ -34,27 +30,24 @@
                     </submit-button>
                 </div>
             </form>
-        </jet-authentication-card>
+        </authentication-card>
     </main-layout>
 </template>
 
 <script>
 import MainLayout from '@/Layouts/MainLayout'
-import ApplicationMark from '@/Components/Main/ApplicationMark'
-import TextInput from '@/Components/Form/TextInput'
+import TextInput from '@/Components/Form/Input'
 import Checkbox from '@/Components/Form/Checkbox'
 import SubmitButton from '@/Components/Form/Button'
-
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
+import AuthenticationCard from '@/Components/AuthenticationCard'
 
 export default {
     components: {
         MainLayout,
-        ApplicationMark,
         TextInput,
         Checkbox,
         SubmitButton,
-        JetAuthenticationCard,
+        AuthenticationCard,
     },
 
     props: {
@@ -64,7 +57,6 @@ export default {
 
     data() {
         return {
-            test: 'test',
             form: this.$inertia.form({
                 email: '',
                 password: '',

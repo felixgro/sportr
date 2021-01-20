@@ -1,5 +1,5 @@
 <template>
-    <jet-action-section>
+    <action-section>
         <template #title>
             Browser Sessions
         </template>
@@ -42,58 +42,32 @@
                     </div>
                 </div>
             </div>
-
-            <div class="flex items-center mt-5">
-                <jet-button @click.native="confirmLogout">
-                    Logout Other Browser Sessions
-                </jet-button>
-
-                <jet-action-message :on="form.recentlySuccessful" class="ml-3">
-                    Done.
-                </jet-action-message>
-            </div>
-
-            <!-- Logout Other Devices Confirmation Modal -->
-            <jet-dialog-modal :show="confirmingLogout" @close="closeModal">
-                <template #title>
-                    Logout Other Browser Sessions
-                </template>
-
-                <template #content>
-                    Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices.
-
-                    <div class="mt-4">
-                        <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
-                                    ref="password"
-                                    v-model="form.password"
-                                    @keyup.enter.native="logoutOtherBrowserSessions" />
-
-                        <jet-input-error :message="form.errors.password" class="mt-2" />
-                    </div>
-                </template>
-
-                <template #footer>
-                    <jet-secondary-button @click.native="closeModal">
-                        Nevermind
-                    </jet-secondary-button>
-
-                    <jet-button class="ml-2" @click.native="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Logout Other Browser Sessions
-                    </jet-button>
-                </template>
-            </jet-dialog-modal>
         </template>
-    </jet-action-section>
+        <template #actions>
+            <jet-action-message :on="form.recentlySuccessful" class="mr-3">
+                    Done.
+            </jet-action-message>
+            <jet-confirms-password title="Logout other Browser Sessions" @confirmed="logoutOtherBrowserSessions">
+                <submit-button type="button" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Log out other Sessions
+                </submit-button>
+            </jet-confirms-password>
+        </template>
+    </action-section>
 </template>
 
 <script>
+// NCzdxvlD2f-7mJM6ZwwXN
     import JetActionMessage from '@/Jetstream/ActionMessage'
+    import ActionSection from '@/Components/Sections/ActionSection'
+    import SubmitButton from '@/Components/Form/Button'
     import JetActionSection from '@/Jetstream/ActionSection'
     import JetButton from '@/Jetstream/Button'
     import JetDialogModal from '@/Jetstream/DialogModal'
     import JetInput from '@/Jetstream/Input'
     import JetInputError from '@/Jetstream/InputError'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+    import JetConfirmsPassword from '@/Jetstream/ConfirmsPassword'
 
     export default {
         props: ['sessions'],
@@ -106,6 +80,9 @@
             JetInput,
             JetInputError,
             JetSecondaryButton,
+            ActionSection,
+            SubmitButton,
+            JetConfirmsPassword
         },
 
         data() {
@@ -125,13 +102,16 @@
                 setTimeout(() => this.$refs.password.focus(), 250)
             },
 
-            logoutOtherBrowserSessions() {
-                this.form.delete(route('other-browser-sessions.destroy'), {
-                    preserveScroll: true,
-                    onSuccess: () => this.closeModal(),
-                    onError: () => this.$refs.password.focus(),
-                    onFinish: () => this.form.reset(),
-                })
+            logoutOtherBrowserSessions(password) {
+                if(password) {
+                    this.form.password = password;
+                    this.form.delete(route('other-browser-sessions.destroy'), {
+                        preserveScroll: true,
+                        onSuccess: () => this.closeModal(),
+                        onError: () => this.$refs.password.focus(),
+                        onFinish: () => this.form.reset(),
+                    })
+                }
             },
 
             closeModal() {

@@ -12,8 +12,8 @@
             <template #content>
                 {{ content }}
 
-                <div class="mt-4">
-                    <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                <div class="mt-4 mb-6">
+                    <text-input label="Password" type="password" class="block w-full" placeholder="Password"
                                 ref="password"
                                 v-model="form.password"
                                 @keyup.enter.native="confirmPassword" />
@@ -23,24 +23,24 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="closeModal">
+                <secondary-button @click.native="closeModal">
                     Nevermind
-                </jet-secondary-button>
+                </secondary-button>
 
-                <jet-button class="ml-2" @click.native="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <submit-button class="ml-2" @click.native="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     {{ button }}
-                </jet-button>
+                </submit-button>
             </template>
         </jet-dialog-modal>
     </span>
 </template>
 
 <script>
-    import JetButton from './Button'
+    import SubmitButton from '@/Components/Form/Button'
     import JetDialogModal from './DialogModal'
-    import JetInput from './Input'
+    import SecondaryButton from '@/Components/Form/ButtonSecondary'
+    import TextInput from '@/Components/Form/Input'
     import JetInputError from './InputError'
-    import JetSecondaryButton from './SecondaryButton'
 
     export default {
         props: {
@@ -56,11 +56,11 @@
         },
 
         components: {
-            JetButton,
+            SubmitButton,
+            SecondaryButton,
             JetDialogModal,
-            JetInput,
+            TextInput,
             JetInputError,
-            JetSecondaryButton,
         },
 
         data() {
@@ -77,11 +77,10 @@
             startConfirmingPassword() {
                 axios.get(route('password.confirmation')).then(response => {
                     if (response.data.confirmed) {
-                        this.$emit('confirmed');
+                        this.$emit('confirmed', this.form.password);
                     } else {
                         this.confirmingPassword = true;
-
-                        setTimeout(() => this.$refs.password.focus(), 250)
+                        setTimeout(() => this.$refs.password.$el.focus(), 250)
                     }
                 })
             },
@@ -93,8 +92,10 @@
                     password: this.form.password,
                 }).then(() => {
                     this.form.processing = false;
-                    this.closeModal()
-                    this.$nextTick(() => this.$emit('confirmed'));
+                    this.$nextTick(function() {
+                        this.$emit('confirmed', this.form.password)
+                        this.closeModal()
+                    });
                 }).catch(error => {
                     this.form.processing = false;
                     this.form.error = error.response.data.errors.password[0];

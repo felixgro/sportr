@@ -1,18 +1,18 @@
 <template>
     <modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
-        <div class="px-6 py-4">
-            <div class="text-lg">
+        <div class="px-8 pt-7">
+            <div class="text-lg font-bold text-gray-700">
                 <slot name="title">
                 </slot>
             </div>
 
-            <div class="mt-4">
+            <div class="mt-3 text-md text-gray-700">
                 <slot name="content">
                 </slot>
             </div>
         </div>
 
-        <div class="px-6 py-4 bg-gray-100 text-right">
+        <div class="px-8 py-4 bg-gray-100 text-right">
             <slot name="footer">
             </slot>
         </div>
@@ -32,7 +32,7 @@
                 default: false
             },
             maxWidth: {
-                default: '2xl'
+                default: 'xl'
             },
             closeable: {
                 default: true

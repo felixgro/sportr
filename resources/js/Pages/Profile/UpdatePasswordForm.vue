@@ -9,22 +9,14 @@
         </template>
 
         <template #form>
+            <!-- Current Password -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="current_password" value="Current Password" />
-                <jet-input id="current_password" type="password" class="mt-1 block w-full" v-model="form.current_password" ref="current_password" autocomplete="current-password" />
-                <jet-input-error :message="form.errors.current_password" class="mt-2" />
+                <text-input label="Current Password" name="current_password" type="password" v-model="form.current_password" errorBag="updatePassword" />
             </div>
 
+            <!-- New Password -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="password" value="New Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" ref="password" autocomplete="new-password" />
-                <jet-input-error :message="form.errors.password" class="mt-2" />
-            </div>
-
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" autocomplete="new-password" />
-                <jet-input-error :message="form.errors.password_confirmation" class="mt-2" />
+                <text-input label="New Password" name="password" type="password" v-model="form.password" errorBag="updatePassword" />
             </div>
         </template>
 
@@ -33,37 +25,32 @@
                 Saved.
             </jet-action-message>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <submit-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Save
-            </jet-button>
+            </submit-button>
         </template>
     </jet-form-section>
 </template>
 
 <script>
-    import JetActionMessage from '@/Jetstream/ActionMessage'
-    import JetButton from '@/Jetstream/Button'
-    import JetFormSection from '@/Jetstream/FormSection'
-    import JetInput from '@/Jetstream/Input'
-    import JetInputError from '@/Jetstream/InputError'
-    import JetLabel from '@/Jetstream/Label'
+import TextInput from '@/Components/Form/Input'
+import SubmitButton from '@/Components/Form/Button'
+import JetActionMessage from '@/Jetstream/ActionMessage'
+import JetFormSection from '@/Jetstream/FormSection'
 
     export default {
         components: {
+            TextInput,
+            SubmitButton,
             JetActionMessage,
-            JetButton,
-            JetFormSection,
-            JetInput,
-            JetInputError,
-            JetLabel,
+            JetFormSection
         },
 
         data() {
             return {
                 form: this.$inertia.form({
                     current_password: '',
-                    password: '',
-                    password_confirmation: '',
+                    password: ''
                 }),
             }
         },

@@ -1,6 +1,6 @@
 <template>
   <main-layout>
-	  hi from test
+	  <h1>Test</h1>
   </main-layout>
 </template>
 

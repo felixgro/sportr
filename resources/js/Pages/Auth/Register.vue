@@ -1,10 +1,6 @@
 <template>
     <main-layout>
-        <jet-authentication-card>
-            <template #logo>
-                <application-mark class="block h-5 w-auto" />
-            </template>
-
+        <authentication-card title="Create new Account">
             <form @submit.prevent="submit">
 
                 <div>
@@ -25,36 +21,34 @@
                     </checkbox>
                 </div>
 
-                <div class="flex items-center justify-end mt-4">
+                <div class="flex items-center justify-end mt-6">
                     <inertia-link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
                         Already registered?
                     </inertia-link>
 
-                    <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <submit-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Register
-                    </jet-button>
+                    </submit-button>
                 </div>
             </form>
-        </jet-authentication-card>
+        </authentication-card>
     </main-layout>
 </template>
 
 <script>
 import MainLayout from '@/Layouts/MainLayout'
-import ApplicationMark from '@/Components/Main/ApplicationMark'
-import TextInput from '@/Components/Form/TextInput'
+import TextInput from '@/Components/Form/Input'
 import Checkbox from '@/Components/Form/Checkbox'
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-import JetButton from '@/Jetstream/Button'
+import SubmitButton from '@/Components/Form/Button'
+import AuthenticationCard from '@/Components/AuthenticationCard'
 
 export default {
     components: {
         MainLayout,
-        ApplicationMark,
         TextInput,
         Checkbox,
-        JetAuthenticationCard,
-        JetButton,
+        AuthenticationCard,
+        SubmitButton,
     },
 
     data() {

@@ -32,7 +32,7 @@
 <script>
 import MainLayout from '@/Layouts/MainLayout'
 import ApplicationMark from '@/Components/Main/ApplicationMark'
-import TextInput from '@/Components/Form/TextInput'
+import TextInput from '@/Components/Form/Input'
 import SubmitButton from '@/Components/Form/Button'
 import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
 

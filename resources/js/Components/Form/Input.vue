@@ -1,11 +1,11 @@
 <template>
 	<div>
-		<label :for="name" class="font-medium text-sm text-gray-600">{{ label }}</label>
+		<label :for="id" class="font-medium text-sm text-gray-600">{{ label }}</label>
 
-    	<input class="block w-full mt-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+    	<input class="bg-gray-50 block w-full mt-1 border-2 border-gray-200 focus:ring-2 focus:ring-main-200 focus:border-main-200 rounded-md shadow-sm"
 			:type="type"
 			:value="value"
-			:id="name"
+			:id="id"
 			@input="$emit('input', $event.target.value)
 		">
 
