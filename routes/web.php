@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -20,9 +22,13 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/test', function () {
+    Gate::allows('view-desktop');
+
     return Inertia::render('Test');
 })->name('test');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+Route::get('/dashboard', [TestController::class, 'dashboard'])->name('dashboard');
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->name('dashboard');
