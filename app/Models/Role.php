@@ -56,7 +56,7 @@ class Role extends Model
             return true;
 
         if ($this->inherit) {
-            // Recursive search for parent roles
+            // Recursively search in parent roles
             return RoleService::get($this->inherit)->hasPermission($permission);
         }
 
