@@ -15,11 +15,11 @@ class ProfileInformationTest extends TestCase
         $updatedData = UserSetup::raw();
 
         $this->put('/user/profile-information', [
-            'name' => $updatedData['name'],
-            'email' => $updatedData['email'],
+            'name' => $updatedData->name,
+            'email' => $updatedData->email,
         ]);
 
-        $this->assertEquals($updatedData['name'], $user->fresh()->name);
-        $this->assertEquals($updatedData['email'], $user->fresh()->email);
+        $this->assertEquals($updatedData->name, $user->fresh()->name);
+        $this->assertEquals($updatedData->email, $user->fresh()->email);
     }
 }

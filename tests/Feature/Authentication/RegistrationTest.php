@@ -21,9 +21,9 @@ class RegistrationTest extends TestCase
         $userData = UserSetup::raw();
 
         $this->post('/register', [
-            'name' => $userData['name'],
-            'email' => $userData['email'],
-            'password' => 'password',
+            'name' => $userData->name,
+            'email' => $userData->email,
+            'password' => $userData->password,
             'terms' => true,
         ])->assertRedirect(RouteServiceProvider::HOME);
 
@@ -36,15 +36,15 @@ class RegistrationTest extends TestCase
         $userData = UserSetup::raw();
 
         $this->post('/register', [
-            'name' => $userData['name'],
-            'email' => $userData['email'],
-            'password' => 'password',
+            'name' => $userData->name,
+            'email' => $userData->email,
+            'password' => $userData->password,
             'terms' => true,
         ]);
 
-        $user = UserSetup::getExisting($userData['email']);
+        $newUser = UserSetup::getExisting($userData->email);
 
-        $this->assertEquals(RoleService::getDefault()->id, $user->role_id);
+        $this->assertEquals(RoleService::getDefault()->id, $newUser->role_id);
     }
 
     /** @test */
@@ -53,9 +53,9 @@ class RegistrationTest extends TestCase
         $userData = UserSetup::raw();
 
         $this->post('/register', [
-            'name' => $userData['name'],
-            'email' => $userData['email'],
-            'password' => 'password'
+            'name' => $userData->name,
+            'email' => $userData->email,
+            'password' => $userData->password
         ])->assertSessionHasErrors(['terms']);
     }
 }

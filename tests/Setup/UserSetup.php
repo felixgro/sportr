@@ -28,11 +28,11 @@ class UserSetup
 	/**
 	 * Returns user's data without storing it in database.
 	 *
-	 * @return array
+	 * @return object
 	 */
 	public function raw()
 	{
-		return User::factory()->raw($this->attributes);
+		return (object) User::factory()->raw($this->attributes);
 	}
 
 	/**
