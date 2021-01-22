@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Location extends Model
+{
+    use HasFactory;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'title',
+        'address',
+        'zip',
+        'city',
+        'country'
+    ];
+
+    /**
+     * Get all events at location.
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+}
