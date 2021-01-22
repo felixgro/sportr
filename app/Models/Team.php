@@ -32,6 +32,8 @@ class Team extends Model
      */
     public function events()
     {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class)
+            ->as('score')
+            ->withPivot('score');
     }
 }
