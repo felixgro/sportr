@@ -2,7 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\{Team, Sport};
+use App\Models\Sport;
+use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TeamFactory extends Factory

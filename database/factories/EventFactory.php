@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\{Event, Sport, Location};
+use App\Models\Event;
+use App\Models\Location;
+use App\Models\Sport;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EventFactory extends Factory
