@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Authentication;
 
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Facades\Tests\Setup\UserSetup;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -17,7 +17,7 @@ class LoginTest extends TestCase
     /** @test */
     public function user_can_login_using_the_login_view()
     {
-        $user = UserSetup::create();
+        $user = User::factory()->create();
 
         $this->post('/login', [
             'email' => $user->email,
@@ -30,7 +30,7 @@ class LoginTest extends TestCase
     /** @test */
     public function user_can_not_login_with_invalid_password()
     {
-        $user = UserSetup::create();
+        $user = User::factory()->create();
 
         $this->post('/login', [
             'email' => $user->email,

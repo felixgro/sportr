@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Facades\Tests\Setup\UserSetup;
+use App\Models\User;
 use Tests\Setup\ApplicationSetup;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -18,7 +18,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected function signIn(string $role = 'user')
     {
-        $usr = UserSetup::withRole($role)->create();
+        $usr = User::factory()->withRole($role)->create();
 
         $this->actingAs($usr);
 

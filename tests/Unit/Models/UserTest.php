@@ -2,15 +2,16 @@
 
 namespace Tests\Unit\Models;
 
-use Facades\Tests\Setup\UserSetup;
+use App\Models\User;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
     /** @test */
-    public function a_user_has_one_role()
+    public function user_belongs_to_role()
     {
-        $user = UserSetup::create();
+        $user = User::factory()->create();
+
         $this->assertInstanceOf('App\Models\Role', $user->role);
     }
 }
