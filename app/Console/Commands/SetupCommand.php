@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Database\Seeders\RoleSeeder;
+use Database\Seeders\SportSeeder;
 use Illuminate\Console\Command;
 
 class SetupCommand extends Command
@@ -57,6 +58,7 @@ class SetupCommand extends Command
 
         if ($this->databaseIsMigrated()) {
             $this->storeRoles();
+            $this->storeSports();
         } else {
             return $this->error('Your database needs to be migrated for the next steps.');
         }
@@ -173,6 +175,18 @@ class SetupCommand extends Command
     {
         if (app(RoleSeeder::class)->run()) {
             $this->info('Roles stored successfully!');
+        }
+    }
+
+    /**
+     * Save default Sports in the given database.
+     *
+     * @return void
+     */
+    protected function storeSports()
+    {
+        if (app(SportSeeder::class)->run()) {
+            $this->info('Sports stored successfully!');
         }
     }
 }
