@@ -2,7 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Database\Seeders\{RoleSeeder, SportSeeder};
+use Database\Seeders\RoleSeeder;
+use Database\Seeders\SportSeeder;
 use Illuminate\Console\Command;
 
 class SetupCommand extends Command
