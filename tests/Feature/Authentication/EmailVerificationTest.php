@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Authentication;
 
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Facades\Tests\Setup\UserSetup;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
@@ -14,9 +14,10 @@ class EmailVerificationTest extends TestCase
     /** @test */
     public function email_verification_view_can_be_rendered()
     {
-        $this->actingAs(UserSetup::notVerified()->create());
+        $user = User::factory()->notVerified()->create();
 
-        $this->get('/email/verify')
+        $this->actingAs($user)
+            ->get('/email/verify')
             ->assertStatus(200);
     }
 
@@ -25,7 +26,7 @@ class EmailVerificationTest extends TestCase
     {
         Event::fake();
 
-        $user = UserSetup::notVerified()->create();
+        $user = User::factory()->notVerified()->create();
 
         $url = URL::temporarySignedRoute(
             'verification.verify',
@@ -43,7 +44,7 @@ class EmailVerificationTest extends TestCase
     /** @test */
     public function email_can_not_be_verified_with_invalid_hash()
     {
-        $user = UserSetup::notVerified()->create();
+        $user = User::factory()->notVerified()->create();
 
         $url = URL::temporarySignedRoute(
             'verification.verify',
