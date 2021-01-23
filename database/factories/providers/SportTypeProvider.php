@@ -7,7 +7,7 @@ use Faker\Provider\Base;
 class SportTypeProvider extends Base
 {
 	/**
-	 * Default sports from config/sportr.php
+	 * Default sports from config/sportr.php.
 	 *
 	 * @return Illuminate\Support\Collection
 	 */
