@@ -17,7 +17,7 @@ class SportTypeProvider extends Base
 	}
 
 	/**
-	 * Returns a random sport.
+	 * Returns a random sport from config.
 	 *
 	 * @return string
 	 */
