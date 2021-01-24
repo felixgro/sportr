@@ -12,7 +12,7 @@ class SportTest extends TestCase
     {
         $sport = Team::factory()->create()->sport;
 
-        $this->assertCount(1, $sport->teams);
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $sport->teams);
         $this->assertInstanceOf('App\Models\Team', $sport->teams->first());
     }
 
@@ -21,7 +21,7 @@ class SportTest extends TestCase
     {
         $sport = Event::factory()->create()->sport;
 
-        $this->assertCount(1, $sport->events);
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $sport->events);
         $this->assertInstanceOf('App\Models\Event', $sport->events->first());
     }
 }
