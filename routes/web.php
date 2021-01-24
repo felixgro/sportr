@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\TestController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SportController;
 use Inertia\Inertia;
 
 /*
@@ -21,12 +20,9 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
 
-Route::get('/test', function () {
-    Gate::allows('view-desktop');
+Route::resource('sports', SportController::class);
 
-    return Inertia::render('Test');
-})->name('test');
-
+// Only for Authorization Testing
 Route::get('/dashboard', [TestController::class, 'dashboard'])->name('dashboard');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
