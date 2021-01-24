@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\SportController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SportController;
 use Inertia\Inertia;
 
 /*
