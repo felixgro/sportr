@@ -1,5 +1,5 @@
 <template>
-    <jet-form-section @submitted="updatePassword">
+    <form-section @submitted="updatePassword">
         <template #title>
             Update Password
         </template>
@@ -29,21 +29,21 @@
                 Save
             </submit-button>
         </template>
-    </jet-form-section>
+    </form-section>
 </template>
 
 <script>
 import TextInput from '@/Components/Form/Input'
 import SubmitButton from '@/Components/Form/Button'
+import FormSection from '@/Components/Sections/FormSection'
 import JetActionMessage from '@/Jetstream/ActionMessage'
-import JetFormSection from '@/Jetstream/FormSection'
 
     export default {
         components: {
             TextInput,
             SubmitButton,
             JetActionMessage,
-            JetFormSection
+            FormSection
         },
 
         data() {

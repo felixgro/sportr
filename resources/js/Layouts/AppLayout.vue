@@ -131,7 +131,7 @@
 </template>
 
 <script>
-    import JetTheLogo from '@/Jetstream/TheLogo'
+    import JetTheLogo from '@/Jetstream/ApplicationMark'
     import JetBanner from '@/Jetstream/Banner'
     import JetDropdown from '@/Jetstream/Dropdown'
     import JetDropdownLink from '@/Jetstream/DropdownLink'

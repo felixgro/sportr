@@ -7,33 +7,31 @@
         </template>
 
         <div>
-            <div class="py-10 w-full md:w-3/4 lg:w-2/3 mx-auto">
-                <div v-if="$page.props.jetstream.canUpdateProfileInformation">
-                    <update-profile-information-form :user="$page.props.user" />
+            <div v-if="$page.props.jetstream.canUpdateProfileInformation">
+                <update-profile-information-form :user="$page.props.user" />
 
-                    <jet-section-border />
-                </div>
-
-                <div v-if="$page.props.jetstream.canUpdatePassword">
-                    <update-password-form class="mt-10 sm:mt-0" />
-
-                    <jet-section-border />
-                </div>
-
-                <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
-                    <two-factor-authentication-form class="mt-10 sm:mt-0" />
-
-                    <jet-section-border />
-                </div>
-
-                <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" />
-
-                <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
-                    <jet-section-border />
-
-                    <delete-user-form class="mt-10 sm:mt-0" />
-                </template>
+                <section-border />
             </div>
+
+            <div v-if="$page.props.jetstream.canUpdatePassword">
+                <update-password-form class="mt-10 sm:mt-0" />
+
+                <section-border />
+            </div>
+
+            <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
+                <two-factor-authentication-form class="mt-10 sm:mt-0" />
+
+                <section-border />
+            </div>
+
+            <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" />
+
+            <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
+                <section-border />
+
+                <delete-user-form class="mt-10 sm:mt-0" />
+            </template>
         </div>
     </main-layout>
 </template>
@@ -45,19 +43,23 @@ import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm'
 import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
 import UpdatePasswordForm from './UpdatePasswordForm'
 import UpdateProfileInformationForm from './UpdateProfileInformationForm'
-import JetSectionBorder from '@/Jetstream/SectionBorder'
+import SectionBorder from '@/Components/Sections/SectionBorder'
 
 export default {
     props: ['sessions'],
 
     components: {
         MainLayout,
+        SectionBorder,
         DeleteUserForm,
-        JetSectionBorder,
         LogoutOtherBrowserSessionsForm,
         TwoFactorAuthenticationForm,
         UpdatePasswordForm,
         UpdateProfileInformationForm,
     },
+
+    created() {
+        console.dir(this.$page.props.user);
+    }
 }
 </script>
