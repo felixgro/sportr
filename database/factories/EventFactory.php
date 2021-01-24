@@ -25,7 +25,7 @@ class EventFactory extends Factory
     {
         return [
             'title' => $this->faker->word,
-            'sport_id' => Sport::factory(),
+            'sport_id' => Sport::all()->random()->id,
             'location_id' => Location::factory(),
             'date' => $this->faker->dateTimeBetween('now', '+2 years')
         ];

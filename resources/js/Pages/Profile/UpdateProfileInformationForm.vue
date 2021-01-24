@@ -1,5 +1,5 @@
 <template>
-    <jet-form-section @submitted="updateProfileInformation">
+    <form-section @submitted="updateProfileInformation">
         <template #title>
             Profile Information
         </template>
@@ -9,6 +9,15 @@
         </template>
 
         <template #form>
+
+            <!-- Role -->
+            <div class="col-span-6 sm:col-span-4">
+                <p class="font-medium text-sm text-gray-600">Role</p>
+                <div class="px-3 py-1 mt-1 bg-main-100 text-main-800 inline-block rounded-full text-sm font-bold">
+                    {{ roleTitle }}
+                </div>
+            </div>
+
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
                 <text-input label="Name" name="name" errorBag="updateProfileInformation" v-model="form.name" />
@@ -18,6 +27,7 @@
             <div class="col-span-6 sm:col-span-4">
                 <text-input label="Email" name="email" errorBag="updateProfileInformation" v-model="form.email" />
             </div>
+
         </template>
 
         <template #actions>
@@ -29,21 +39,21 @@
                 Save
             </submit-button>
         </template>
-    </jet-form-section>
+    </form-section>
 </template>
 
 <script>
 import TextInput from '@/Components/Form/Input'
 import SubmitButton from '@/Components/Form/Button'
-import JetFormSection from '@/Jetstream/FormSection'
+import FormSection from '@/Components/Sections/FormSection'
 import JetActionMessage from '@/Jetstream/ActionMessage'
 
     export default {
         components: {
             TextInput,
             SubmitButton,
+            FormSection,
             JetActionMessage,
-            JetFormSection
         },
 
         props: ['user'],
@@ -55,6 +65,14 @@ import JetActionMessage from '@/Jetstream/ActionMessage'
                     name: this.user.name,
                     email: this.user.email
                 })
+            }
+        },
+
+        computed: {
+            roleTitle() {
+                let title = this.$page.props.user.role.title;
+
+                return title.charAt(0).toUpperCase() + title.slice(1)
             }
         },
 

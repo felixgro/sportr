@@ -4,7 +4,7 @@ export const mainNavigationItems = [
 		route: 'home'
 	},
 	{
-		title: 'Test',
-		route: 'test'
+		title: 'Sports',
+		route: 'sports.index'
 	}
 ]

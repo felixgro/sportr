@@ -88,7 +88,6 @@
 </template>
 
 <script>
-import TextInput from '@/Components/Form/Input'
 import SubmitButton from '@/Components/Form/Button'
 import JetButton from '@/Jetstream/Button'
 import ActionSection from '@/Components/Sections/ActionSection'

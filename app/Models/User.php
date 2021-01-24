@@ -32,6 +32,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $with = [
+        'role'
+    ];
+
     /**
      * Get role from current user.
      *
