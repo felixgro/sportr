@@ -15,7 +15,7 @@ class CreateSportsTable extends Migration
     {
         Schema::create('sports', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->unique();
         });
     }
 

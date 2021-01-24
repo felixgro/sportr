@@ -36,7 +36,7 @@ return [
         ],
         [
             'role' => 'admin',
-            'permissions' => ['delete-event', 'edit-roles', 'view-dashboard'],
+            'permissions' => ['view-dashboard', 'edit-role', 'edit-sport'],
             'inherit' => 'moderator'
         ]
     ]

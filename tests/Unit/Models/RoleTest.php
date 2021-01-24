@@ -17,6 +17,12 @@ class RoleTest extends TestCase
     }
 
     /** @test */
+    public function role_can_get_all_its_permissions()
+    {
+        $this->assertIsArray(Role::find(1)->allPermissions);
+    }
+
+    /** @test */
     public function role_can_check_if_it_contains_a_permission()
     {
         $role = Role::find(1);

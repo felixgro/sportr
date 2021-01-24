@@ -24,7 +24,7 @@ class TeamFactory extends Factory
     {
         return [
             'title' => $this->faker->word,
-            'sport_id' => Sport::factory()
+            'sport_id' => Sport::all()->random()->id
         ];
     }
 }
