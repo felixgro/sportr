@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sport;
 use App\Http\Requests\SportRequest;
+use App\Models\Sport;
 use Inertia\Inertia;
 
 class SportController extends Controller
