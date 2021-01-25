@@ -14,6 +14,7 @@ class CreateEventTeamTable extends Migration
     public function up()
     {
         Schema::create('event_team', function (Blueprint $table) {
+            $table->id();
             $table->integer('score')->nullable();
 
             $table->foreignId('event_id')->constrained()
@@ -23,6 +24,8 @@ class CreateEventTeamTable extends Migration
             $table->foreignId('team_id')->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+            $table->unique(['event_id', 'team_id']);
         });
     }
 
