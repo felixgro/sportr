@@ -25,7 +25,7 @@ php artisan sportr:setup
 php artisan serve
 ```
 
-Check out the [Setup Guide](_docs/SetupGuide.md) for detailed instructions on how to manually setup Sportr on your machine.
+Check out the [Setup Guide](docs/SetupGuide.md) for detailed instructions on how to manually setup Sportr on your machine.
 
 ## Testing
 You can find all tests in the `tests/` directory.
