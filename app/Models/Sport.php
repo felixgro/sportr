@@ -43,11 +43,13 @@ class Sport extends Model
      */
     public function updateWithOptionalIcon($attr)
     {
-        if (!$attr['icon']) {
+        if (! $attr['icon']) {
             unset($attr['icon']);
         } else {
             // delete old icon
-            if (Storage::exists($this->icon)) Storage::delete($this->icon);
+            if (Storage::exists($this->icon)) {
+                Storage::delete($this->icon);
+            }
 
             // store new icon
             $iconName = 'sport_' . now()->format('YmdHisu') . '.svg';
