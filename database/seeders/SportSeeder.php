@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Sport;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\File;
+use Illuminate\Support\Str;
 
 class SportSeeder extends Seeder
 {
@@ -18,9 +20,14 @@ class SportSeeder extends Seeder
             return false;
         }
 
-        foreach (config('sportr.default_sports') as $sport) {
-            Sport::create([
-                'title' => $sport['title']
+        foreach (config('sportr.sports') as $sport) {
+
+            // Seach icon in resources/icons by kebabcasing the sport's title
+            $iconPath = resource_path() . '/icons/' . Str::kebab($sport) . '.svg';
+
+            Sport::createWithIcon([
+                'title' => $sport,
+                'icon' => new File($iconPath)
             ]);
         }
 

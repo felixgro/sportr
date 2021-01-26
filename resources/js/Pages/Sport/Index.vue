@@ -7,7 +7,10 @@
 
         <ul>
             <li v-for="sport in sports" :key="sport.id">
-                {{ sport.id }}: {{ sport.title }}
+                <inertia-link :href="'sports/' + sport.id + '/edit'" class="flex items-center my-5">
+                    <img class="h-8 mr-3" :src="sport.icon" :alt="sport.title + ' Icon'">
+                    {{ sport.id }}: {{ sport.title }}
+                </inertia-link>
             </li>
         </ul>
 
@@ -18,7 +21,6 @@
 import MainLayout from '@/Layouts/MainLayout'
 
 export default {
-
     props: ['sports'],
 
     components: {

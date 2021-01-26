@@ -7,7 +7,7 @@
             </jet-section-title>
 
             <div class="mt-5 sm:mt-0 sm:col-span-2">
-                <form @submit.prevent="$emit('submitted')">
+                <form @submit.prevent="$emit('submitted')" enctype="multipart/form-data">
                     <div class="shadow overflow-hidden rounded-lg">
                         <div class="px-4 py-5 bg-gray-200 bg-opacity-20 sm:p-6">
                             <div class="grid grid-cols-6 gap-6">
