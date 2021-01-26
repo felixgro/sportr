@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Sport\{CreateSport, EditSport};
+use App\Http\Requests\Sport\CreateSport;
+use App\Http\Requests\Sport\EditSport;
 use App\Models\Sport;
 use Inertia\Inertia;
 
