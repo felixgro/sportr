@@ -33,8 +33,6 @@ Route::get('sports/{sport}/teams/{team}/edit', [SportTeamController::class, 'edi
 Route::put('sports/{sport}/teams/{team}', [SportTeamController::class, 'update'])->name('sportteams.update');
 Route::delete('sports/{sport}/teams/{team}', [SportTeamController::class, 'destroy'])->name('sportteams.destroy');
 
-
-
 // Only for Authorization Testing
 Route::get('/dashboard', [TestController::class, 'dashboard'])->name('dashboard');
 
