@@ -10,6 +10,11 @@
 			</template>
 
 			<template #form>
+				<!-- Icon -->
+				<div class="col-span-6 sm:col-span-4">
+					<image-upload label="Icon" name="icon" v-model="sport.icon" />
+				</div>
+
 				<!-- Title -->
 				<div class="col-span-6 sm:col-span-4">
 					<text-input label="Title" name="title" v-model="sport.title" />

@@ -53,7 +53,7 @@ class SportController extends Controller
      */
     public function show(Sport $sport)
     {
-        //
+        return Sport::find($sport->id)->with('teams')->first();
     }
 
     /**

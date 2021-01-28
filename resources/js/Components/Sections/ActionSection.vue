@@ -1,5 +1,5 @@
 <template>
-    <div class="py-10 w-full md:w-3/4 mx-auto">
+    <div class="py-10 w-full">
         <div class="sm:grid sm:grid-cols-3 sm:gap-6">
             <jet-section-title>
                 <template #title><slot name="title"></slot></template>

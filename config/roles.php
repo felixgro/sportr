@@ -31,7 +31,7 @@ return [
         ],
         [
             'role' => 'moderator',
-            'permissions' => ['edit-event'],
+            'permissions' => ['edit-event', 'edit-team'],
             'inherit' => 'user'
         ],
         [

@@ -12,7 +12,8 @@ class Team extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'title'
+        'title',
+        'sport_id'
     ];
 
     /**
