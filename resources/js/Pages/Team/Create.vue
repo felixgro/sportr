@@ -2,28 +2,27 @@
 	<main-layout>
 		<form-section @submitted="submit">
 			<template #title>
-				Add new Sport
+				Add new Team
 			</template>
 
 			<template #description>
-				Create and store a new sport using a unique title and an Icon.
+				Create and store a new team using a title and assign it to a sport.
 			</template>
 
 			<template #form>
-				<!-- Icon -->
-				<div class="col-span-6 sm:col-span-4">
-					<image-upload label="Icon" name="icon" v-model="sport.icon" />
-				</div>
-
 				<!-- Title -->
 				<div class="col-span-6 sm:col-span-4">
-					<text-input label="Title" name="title" v-model="sport.title" />
+					<text-input label="Title" name="title" v-model="team.title" />
 				</div>
 
+				<!-- Sport ID -->
+				<div class="col-span-6 sm:col-span-4">
+					<text-input label="Sport Id" name="sportId" v-model="sportId" />
+				</div>
 			</template>
 
 			<template #actions>
-				<submit-button :class="{ 'opacity-25': sport.processing }" :disabled="sport.processing">
+				<submit-button :class="{ 'opacity-25': team.processing }" :disabled="team.processing">
 					Add
 				</submit-button>
 			</template>
@@ -49,16 +48,16 @@ export default {
 
 	data() {
 		return {
-			sport: this.$inertia.form({
+			team: this.$inertia.form({
 				title: '',
-				icon: null
-			})
+			}),
+			sportId: "0"
 		}
 	},
 
 	methods: {
 		submit() {
-			this.sport.post(route('sports.store'));
+			this.team.post(route('sportteams.store', this.sportId));
 		}
 	}
 }

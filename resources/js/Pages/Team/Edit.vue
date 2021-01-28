@@ -2,28 +2,27 @@
 	<main-layout>
 		<form-section @submitted="submit">
 			<template #title>
-				Add new Sport
+				Edit Team
 			</template>
 
 			<template #description>
-				Create and store a new sport using a unique title and an Icon.
+				Edit and update an existing team with a title and assign it to a sport.
 			</template>
 
 			<template #form>
-				<!-- Icon -->
-				<div class="col-span-6 sm:col-span-4">
-					<image-upload label="Icon" name="icon" v-model="sport.icon" />
-				</div>
-
 				<!-- Title -->
 				<div class="col-span-6 sm:col-span-4">
-					<text-input label="Title" name="title" v-model="sport.title" />
+					<text-input label="Title" name="title" v-model="form.title" />
 				</div>
 
+				<!-- Sport ID -->
+				<div class="col-span-6 sm:col-span-4">
+					<text-input label="Sport Id" name="sportId" v-model="form.sport_id" />
+				</div>
 			</template>
 
 			<template #actions>
-				<submit-button :class="{ 'opacity-25': sport.processing }" :disabled="sport.processing">
+				<submit-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
 					Add
 				</submit-button>
 			</template>
@@ -47,18 +46,26 @@ export default {
 		FormSection
 	},
 
+	props: ['team'],
+
 	data() {
 		return {
-			sport: this.$inertia.form({
-				title: '',
-				icon: null
-			})
+			form: this.$inertia.form({
+				_method: 'PUT',
+				title: null,
+				sport_id: null
+			}),
 		}
+	},
+
+	created() {
+		this.form.title = this.team.title
+		this.form.sport_id = this.team.sport_id.toString()
 	},
 
 	methods: {
 		submit() {
-			this.sport.post(route('sports.store'));
+			this.form.post(route('sportteams.update', [this.form.sport_id, this.team.id]));
 		}
 	}
 }

@@ -24,6 +24,9 @@ Route::get('/', function () {
 // Sport route
 Route::resource('sports', SportController::class);
 
+// Only for Authorization Testing
+Route::get('/dashboard', [TestController::class, 'dashboard'])->name('dashboard');
+
 // Sport team routes
 Route::get('sports/{sport}/teams', [SportTeamController::class, 'index'])->name('sportteams.index');
 Route::get('sports/{sport}/teams/create', [SportTeamController::class, 'create'])->name('sportteams.create');
@@ -32,9 +35,6 @@ Route::get('sports/{sport}/teams/{team}', [SportTeamController::class, 'show'])-
 Route::get('sports/{sport}/teams/{team}/edit', [SportTeamController::class, 'edit'])->name('sportteams.edit');
 Route::put('sports/{sport}/teams/{team}', [SportTeamController::class, 'update'])->name('sportteams.update');
 Route::delete('sports/{sport}/teams/{team}', [SportTeamController::class, 'destroy'])->name('sportteams.destroy');
-
-// Only for Authorization Testing
-Route::get('/dashboard', [TestController::class, 'dashboard'])->name('dashboard');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
