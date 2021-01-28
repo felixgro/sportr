@@ -2,7 +2,7 @@
 	<main-layout>
 		<form-section @submitted="submit">
 			<template #title>
-				Edit {{ sport.title }}
+				Edit Sport
 			</template>
 
 			<template #description>

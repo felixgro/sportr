@@ -35258,9 +35258,7 @@ var render = function() {
           {
             key: "title",
             fn: function() {
-              return [
-                _vm._v("\n\t\t\t\tEdit " + _vm._s(_vm.sport.title) + "\n\t\t\t")
-              ]
+              return [_vm._v("\n\t\t\t\tEdit Sport\n\t\t\t")]
             },
             proxy: true
           },
