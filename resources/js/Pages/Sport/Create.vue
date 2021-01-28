@@ -20,10 +20,6 @@
 					<text-input label="Title" name="title" v-model="sport.title" />
 				</div>
 
-				<!-- Icon -->
-				<div class="col-span-6 sm:col-span-4">
-					<image-upload label="Icon" name="icon" v-model="sport.icon" />
-				</div>
 			</template>
 
 			<template #actions>

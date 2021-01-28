@@ -5261,10 +5261,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -35159,24 +35155,6 @@ var render = function() {
                           _vm.$set(_vm.sport, "title", $$v)
                         },
                         expression: "sport.title"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-span-6 sm:col-span-4" },
-                  [
-                    _c("image-upload", {
-                      attrs: { label: "Icon", name: "icon" },
-                      model: {
-                        value: _vm.sport.icon,
-                        callback: function($$v) {
-                          _vm.$set(_vm.sport, "icon", $$v)
-                        },
-                        expression: "sport.icon"
                       }
                     })
                   ],
