@@ -35,6 +35,8 @@
 import FormField from '@/Mixins/FormField'
 
 export default {
+	mixins: [FormField],
+
 	props: {
 		label: String,
 		name: String,
@@ -44,8 +46,6 @@ export default {
 			default: null
 		}
 	},
-
-	mixins: [FormField],
 
 	model: {
         prop: "file",

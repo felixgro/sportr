@@ -20,6 +20,7 @@ import FormField from '@/Mixins/FormField'
 
 export default {
 	mixins: [FormField],
+
 	props: {
 		value: {
 			type: String,

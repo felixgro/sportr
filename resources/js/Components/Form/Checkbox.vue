@@ -23,10 +23,7 @@ import FormField from '@/Mixins/FormField'
 
 export default {
     mixins: [FormField],
-    model: {
-        prop: "checked",
-        event: "change",
-    },
+
     props: {
         checked: {
             type: [Array, Boolean],
@@ -36,6 +33,12 @@ export default {
             default: null,
         },
     },
+
+    model: {
+        prop: "checked",
+        event: "change",
+    },
+
     computed: {
         proxyChecked: {
             get() {

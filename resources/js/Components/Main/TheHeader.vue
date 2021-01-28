@@ -93,11 +93,13 @@ export default {
 		TheSearchbar,
 		JetDropdownLink
 	},
+
 	data() {
 		return {
 			navItems: mainNavigationItems
 		}
 	},
+
 	methods: {
 		logout() {
 			this.$inertia.post(route('logout'))
