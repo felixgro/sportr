@@ -70,9 +70,6 @@ import DangerButton from '@/Components/Form/ButtonDanger'
 import JetConfirmsPassword from '@/Jetstream/ConfirmsPassword'
 
 export default {
-
-	props: ['sport'],
-
 	components: {
 		MainLayout,
 		TextInput,
@@ -83,6 +80,8 @@ export default {
 		DangerButton,
 		JetConfirmsPassword
 	},
+
+	props: ['sport'],
 
 	data() {
 		return {
@@ -102,6 +101,7 @@ export default {
 		submit() {
 			this.form.post(route('sports.update', this.sport.id));
 		},
+
 		deleteSport() {
 			this.$inertia.delete(route('sports.destroy', this.sport.id))
 		}

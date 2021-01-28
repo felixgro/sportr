@@ -26,17 +26,17 @@
 </template>
 
 <script>
-    import JetSectionTitle from '@/Jetstream/SectionTitle'
+import JetSectionTitle from '@/Jetstream/SectionTitle'
 
-    export default {
-        components: {
-            JetSectionTitle,
-        },
+export default {
+    components: {
+        JetSectionTitle,
+    },
 
-        computed: {
-            hasActions() {
-                return !! this.$slots.actions
-            }
+    computed: {
+        hasActions() {
+            return !! this.$slots.actions
         }
     }
+}
 </script>

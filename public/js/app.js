@@ -2110,10 +2110,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mixins: [_Mixins_FormField__WEBPACK_IMPORTED_MODULE_0__.default],
-  model: {
-    prop: "checked",
-    event: "change"
-  },
   props: {
     checked: {
       type: [Array, Boolean],
@@ -2122,6 +2118,10 @@ __webpack_require__.r(__webpack_exports__);
     value: {
       "default": null
     }
+  },
+  model: {
+    prop: "checked",
+    event: "change"
   },
   computed: {
     proxyChecked: {
@@ -2184,6 +2184,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  mixins: [_Mixins_FormField__WEBPACK_IMPORTED_MODULE_0__.default],
   props: {
     label: String,
     name: String,
@@ -2193,7 +2194,6 @@ __webpack_require__.r(__webpack_exports__);
       "default": null
     }
   },
-  mixins: [_Mixins_FormField__WEBPACK_IMPORTED_MODULE_0__.default],
   model: {
     prop: "file",
     event: "change"
@@ -5380,7 +5380,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['sport'],
   components: {
     MainLayout: _Layouts_MainLayout__WEBPACK_IMPORTED_MODULE_0__.default,
     TextInput: _Components_Form_Input__WEBPACK_IMPORTED_MODULE_2__.default,
@@ -5391,6 +5390,7 @@ __webpack_require__.r(__webpack_exports__);
     DangerButton: _Components_Form_ButtonDanger__WEBPACK_IMPORTED_MODULE_6__.default,
     JetConfirmsPassword: _Jetstream_ConfirmsPassword__WEBPACK_IMPORTED_MODULE_7__.default
   },
+  props: ['sport'],
   data: function data() {
     return {
       form: this.$inertia.form({
