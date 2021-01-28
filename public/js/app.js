@@ -5307,6 +5307,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Form_Input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/Form/Input */ "./resources/js/Components/Form/Input.vue");
 /* harmony import */ var _Components_Form_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/Form/Button */ "./resources/js/Components/Form/Button.vue");
 /* harmony import */ var _Components_Form_ImageUpload__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/Form/ImageUpload */ "./resources/js/Components/Form/ImageUpload.vue");
+/* harmony import */ var _Components_Sections_ActionSection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Components/Sections/ActionSection */ "./resources/js/Components/Sections/ActionSection.vue");
+/* harmony import */ var _Components_Form_ButtonDanger__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/Form/ButtonDanger */ "./resources/js/Components/Form/ButtonDanger.vue");
+/* harmony import */ var _Jetstream_ConfirmsPassword__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/ConfirmsPassword */ "./resources/js/Jetstream/ConfirmsPassword.vue");
 //
 //
 //
@@ -5340,6 +5343,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 
 
@@ -5352,7 +5386,10 @@ __webpack_require__.r(__webpack_exports__);
     TextInput: _Components_Form_Input__WEBPACK_IMPORTED_MODULE_2__.default,
     SubmitButton: _Components_Form_Button__WEBPACK_IMPORTED_MODULE_3__.default,
     FormSection: _Components_Sections_FormSection__WEBPACK_IMPORTED_MODULE_1__.default,
-    ImageUpload: _Components_Form_ImageUpload__WEBPACK_IMPORTED_MODULE_4__.default
+    ImageUpload: _Components_Form_ImageUpload__WEBPACK_IMPORTED_MODULE_4__.default,
+    ActionSection: _Components_Sections_ActionSection__WEBPACK_IMPORTED_MODULE_5__.default,
+    DangerButton: _Components_Form_ButtonDanger__WEBPACK_IMPORTED_MODULE_6__.default,
+    JetConfirmsPassword: _Jetstream_ConfirmsPassword__WEBPACK_IMPORTED_MODULE_7__.default
   },
   data: function data() {
     return {
@@ -5369,6 +5406,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     submit: function submit() {
       this.form.post(route('sports.update', this.sport.id));
+    },
+    deleteSport: function deleteSport() {
+      this.$inertia["delete"](route('sports.destroy', this.sport.id));
     }
   }
 });
@@ -5482,7 +5522,7 @@ __webpack_require__.r(__webpack_exports__);
       team: this.$inertia.form({
         title: ''
       }),
-      sportId: "18"
+      sportId: "0"
     };
   },
   methods: {
@@ -35219,7 +35259,7 @@ var render = function() {
             key: "title",
             fn: function() {
               return [
-                _vm._v("\n\t\t\tEdit " + _vm._s(_vm.sport.title) + "\n\t\t")
+                _vm._v("\n\t\t\t\tEdit " + _vm._s(_vm.sport.title) + "\n\t\t\t")
               ]
             },
             proxy: true
@@ -35229,7 +35269,7 @@ var render = function() {
             fn: function() {
               return [
                 _vm._v(
-                  "\n\t\t\tChange the title or icon of an existing sport by filling out the given form.\n\t\t"
+                  "\n\t\t\t\tChange the title or icon of an existing sport by filling out the given form.\n\t\t\t"
                 )
               ]
             },
@@ -35292,7 +35332,96 @@ var render = function() {
                     class: { "opacity-25": _vm.form.processing },
                     attrs: { disabled: _vm.form.processing }
                   },
-                  [_vm._v("\n\t\t\t\tSave Changes\n\t\t\t")]
+                  [_vm._v("\n\t\t\t\t\tSave Changes\n\t\t\t\t")]
+                )
+              ]
+            },
+            proxy: true
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _c("action-section", {
+        scopedSlots: _vm._u([
+          {
+            key: "title",
+            fn: function() {
+              return [_vm._v("\n\t\t\t\tDelete Sport\n\t\t\t")]
+            },
+            proxy: true
+          },
+          {
+            key: "description",
+            fn: function() {
+              return [
+                _vm._v(
+                  "\n\t\t\t\tPermanently delete a sport along with all related data.\n\t\t\t"
+                )
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "content",
+            fn: function() {
+              return [
+                _c("div", { staticClass: "max-w-xl text-sm text-gray-600" }, [
+                  _vm._v(
+                    "\n\t\t\t\t\tOnce a sport is deleted, all of its teams and events will be permanently deleted as well.\n\t\t\t\t\tBefore deleting this sport, please consider downloading any data or information that you wish to retain.\n\t\t\t\t\t"
+                  ),
+                  _c(
+                    "div",
+                    { staticClass: "mt-3" },
+                    [
+                      _c(
+                        "inertia-link",
+                        {
+                          staticClass: "font-bold",
+                          attrs: { href: "/sports/1/teams" }
+                        },
+                        [_vm._v("12 Teams")]
+                      ),
+                      _vm._v(" and\n\t\t\t\t\t\t"),
+                      _c(
+                        "inertia-link",
+                        {
+                          staticClass: "font-bold",
+                          attrs: { href: "/sports/1/events" }
+                        },
+                        [_vm._v("5 Events")]
+                      ),
+                      _vm._v(
+                        " are currently\n\t\t\t\t\t\trelated to this sport.\n\t\t\t\t\t"
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "actions",
+            fn: function() {
+              return [
+                _c(
+                  "jet-confirms-password",
+                  {
+                    attrs: { title: "Permanently delete Account" },
+                    on: { confirmed: _vm.deleteSport }
+                  },
+                  [
+                    _c(
+                      "danger-button",
+                      {
+                        class: { "opacity-25": _vm.form.processing },
+                        attrs: { type: "button", disabled: _vm.form.processing }
+                      },
+                      [_vm._v("\n\t\t\t\t\t\tDelete Sport\n\t\t\t\t\t")]
+                    )
+                  ],
+                  1
                 )
               ]
             },

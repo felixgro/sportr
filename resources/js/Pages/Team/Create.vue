@@ -51,7 +51,7 @@ export default {
 			team: this.$inertia.form({
 				title: '',
 			}),
-			sportId: "18"
+			sportId: "0"
 		}
 	},
 
