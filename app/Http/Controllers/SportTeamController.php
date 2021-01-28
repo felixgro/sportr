@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Team\{CreateTeam, EditTeam};
-use App\Models\{Sport, Team};
+use App\Http\Requests\Team\CreateTeam;
+use App\Http\Requests\Team\EditTeam;
+use App\Models\Sport;
+use App\Models\Team;
 use Inertia\Inertia;
 
 class SportTeamController extends Controller
