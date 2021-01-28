@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SportRequest;
+use App\Http\Requests\Sport\CreateSport;
+use App\Http\Requests\Sport\EditSport;
 use App\Models\Sport;
 use Inertia\Inertia;
 
@@ -35,12 +36,12 @@ class SportController extends Controller
     /**
      * Store a newly created sport in storage.
      *
-     * @param  \App\Http\Requests\SportRequest  $request
+     * @param  \App\Http\Requests\Sport\CreateSport  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(SportRequest $request)
+    public function store(CreateSport $request)
     {
-        Sport::create($request->validated());
+        Sport::createWithIcon($request->validated());
 
         return redirect()->route('sports.index');
     }
@@ -65,20 +66,22 @@ class SportController extends Controller
     public function edit(Sport $sport)
     {
         return Inertia::render('Sport/Edit', [
-            'sport' => fn () => $sport->only('id', 'title')
+            'sport' => fn () => $sport->only('id', 'title', 'icon')
         ]);
     }
 
     /**
      * Update given sport in storage.
      *
-     * @param  \App\Http\Requests\SportRequest  $request
+     * @param  \App\Http\Requests\Sport\EditSport  $request
      * @param  \App\Models\Sport  $sport
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(SportRequest $request, Sport $sport)
+    public function update(EditSport $request, Sport $sport)
     {
-        $sport->update($request->validated());
+        $data = $request->validated();
+
+        $sport->updateWithOptionalIcon($data);
 
         return redirect()->route('sports.index');
     }

@@ -19,6 +19,11 @@
 				<div class="col-span-6 sm:col-span-4">
 					<text-input label="Title" name="title" v-model="form.title" />
 				</div>
+
+				<!-- Icon -->
+				<div class="col-span-6 sm:col-span-4">
+					<image-upload label="Icon" name="icon" v-model="form.icon" :preview="sport.icon" />
+				</div>
 			</template>
 
 			<template #actions>
@@ -35,6 +40,7 @@ import MainLayout from '@/Layouts/MainLayout'
 import FormSection from '@/Components/Sections/FormSection'
 import TextInput from '@/Components/Form/Input'
 import SubmitButton from '@/Components/Form/Button'
+import ImageUpload from '@/Components/Form/ImageUpload'
 
 export default {
 
@@ -44,13 +50,16 @@ export default {
 		MainLayout,
 		TextInput,
 		SubmitButton,
-		FormSection
+		FormSection,
+		ImageUpload
 	},
 
 	data() {
 		return {
 			form: this.$inertia.form({
-				title: ''
+				_method: 'PUT',
+				title: '',
+				icon: null
 			})
 		}
 	},
@@ -61,7 +70,7 @@ export default {
 
 	methods: {
 		submit() {
-			this.form.put(route('sports.update', this.sport.id));
+			this.form.post(route('sports.update', this.sport.id));
 		}
 	}
 }

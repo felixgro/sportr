@@ -3,7 +3,7 @@
 ![Build Status](https://img.shields.io/travis/com/felixgro/sportr/master?style=flat-square) ![StyleCI](https://github.styleci.io/repos/329913094/shield?branch=master)
 
 A clean & user-friendly sport event app for the web.
-Built with Laravel 8, InteriaJs and VueJs.
+Built on Laravel 8, InteriaJs and VueJs.
 
 ## Setup
 ##### Prerequisites:

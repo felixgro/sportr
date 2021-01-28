@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Sport;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SportRequest extends FormRequest
+class EditSport extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class SportRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|unique:sports'
+            'title' => 'required|string|unique:sports,title,' . $this->sport->id,
+            'icon' => 'nullable|mimes:svg|max:2000'
         ];
     }
 
