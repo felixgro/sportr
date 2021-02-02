@@ -65,6 +65,8 @@ class SportController extends Controller
      */
     public function edit(Sport $sport)
     {
+        $this->authorize('edit-sport');
+
         return Inertia::render('Sport/Edit', [
             'sport' => fn () => $sport->only('id', 'title', 'icon')
         ]);
