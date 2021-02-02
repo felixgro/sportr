@@ -2,7 +2,8 @@
 
 namespace App\Console;
 
-use App\Console\Commands\{SetupCommand, ResetCommand};
+use App\Console\Commands\ResetCommand;
+use App\Console\Commands\SetupCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

@@ -72,7 +72,7 @@ class ResetCommand extends Command
     }
 
     /**
-     * Deletes .env file
+     * Deletes .env file.
      *
      * @return void
      */
