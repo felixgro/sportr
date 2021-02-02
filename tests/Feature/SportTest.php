@@ -29,6 +29,8 @@ class SportTest extends TestCase
     /** @test */
     public function edit_sport_view_can_be_rendered()
     {
+        $this->signIn($this->role);
+
         $this->get(route('sports.edit', 1))->assertStatus(200);
     }
 
@@ -37,7 +39,7 @@ class SportTest extends TestCase
     {
         $this->signIn($this->role);
 
-        Storage::fake();
+        Storage::fake('public');
 
         $this->post(route('sports.store'), [
             'title' => 'New Sport Title',
@@ -46,7 +48,7 @@ class SportTest extends TestCase
 
         $sport = Sport::where('title', 'New Sport Title')->first();
 
-        Storage::assertExists($sport->icon);
+        $this->assertTrue(Storage::disk('public')->exists($sport->relIconPath()));
     }
 
     /** @test */
@@ -54,7 +56,7 @@ class SportTest extends TestCase
     {
         $this->signIn($this->role);
 
-        Storage::fake();
+        Storage::fake('public');
 
         $this->post(route('sports.store'), [
             'title' => 'New Sport Title 2',
@@ -68,8 +70,8 @@ class SportTest extends TestCase
             'icon' => UploadedFile::fake()->image('updated_icon.svg')
         ]);
 
-        Storage::assertMissing($sport->icon);
-        Storage::assertExists($sport->fresh()->icon);
+        $this->assertFalse(Storage::disk('public')->exists($sport->relIconPath()));
+        $this->assertTrue(Storage::disk('public')->exists($sport->fresh()->relIconPath()));
         $this->assertDatabaseHas('sports', ['title' => 'Updated Sport Title']);
     }
 

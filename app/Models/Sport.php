@@ -30,30 +30,30 @@ class Sport extends Model
     {
         $iconName = 'sport_' . now()->format('YmdHisu') . '.svg';
 
-        $attr['icon'] = Storage::putFileAs('icons', $attr['icon'], $iconName);
+        $attr['icon'] = 'storage/' . Storage::disk('public')->putFileAs('icons', $attr['icon'], $iconName);
 
         return Sport::create($attr);
     }
 
     /**
-     * Updates an existing sport.
+     * Updates an existing sport and replaces its icon if necessary.
      *
      * @param array $attr
      * @return bool
      */
     public function updateWithOptionalIcon($attr)
     {
-        if (! $attr['icon']) {
+        if (!$attr['icon']) {
             unset($attr['icon']);
         } else {
             // delete old icon
-            if (Storage::exists($this->icon)) {
-                Storage::delete($this->icon);
+            if (Storage::disk('public')->exists($this->relIconPath())) {
+                Storage::disk('public')->delete($this->relIconPath());
             }
 
             // store new icon
             $iconName = 'sport_' . now()->format('YmdHisu') . '.svg';
-            $attr['icon'] = Storage::putFileAs('icons', $attr['icon'], $iconName);
+            $attr['icon'] = Storage::disk('public')->putFileAs('icons', $attr['icon'], $iconName);
         }
 
         return $this->update($attr);
@@ -77,5 +77,17 @@ class Sport extends Model
     public function teams()
     {
         return $this->hasMany(Team::class);
+    }
+
+    /**
+     * Get relative path of icon for storage facade
+     *
+     * @return string
+     */
+    public function relIconPath()
+    {
+        preg_match('/icons\/.*/', $this->icon, $matches);
+
+        return $matches[0];
     }
 }
