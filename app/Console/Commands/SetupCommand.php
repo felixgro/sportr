@@ -67,7 +67,11 @@ class SetupCommand extends Command
 
         $this->call('cache:clear');
 
-        $this->info('Sportr is ready! Have fun :)');
+        $this->call('storage:link');
+
+        $this->info('>> Sportr is ready! Have fun :)');
+
+        return 0;
     }
 
     /**
