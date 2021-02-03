@@ -24,7 +24,7 @@ class RoleService
      */
     public function isReady()
     {
-        return ! Role::all()->isEmpty();
+        return !Role::all()->isEmpty();
     }
 
     /**
@@ -34,7 +34,7 @@ class RoleService
      */
     public function getDefault()
     {
-        return Role::where('title', $this->config('default'))->first();
+        return $this->get($this->config('default'));
     }
 
     /**
