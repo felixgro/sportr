@@ -20,3 +20,10 @@ beforeScript:
   - composer self-update
   - composer install --no-interaction
   - php artisan key:generate
+
+notifications:
+  email:
+    recipients:
+      - me@felixgrohs.at
+    on_success: never
+    on_failure: always
