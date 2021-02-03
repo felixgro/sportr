@@ -19,6 +19,12 @@ class SportTest extends TestCase
     }
 
     /** @test */
+    public function single_sport_view_can_be_rendered()
+    {
+        $this->get(route('sports.show', 1))->assertStatus(200);
+    }
+
+    /** @test */
     public function create_sport_view_can_be_rendered()
     {
         $this->signIn($this->role);
