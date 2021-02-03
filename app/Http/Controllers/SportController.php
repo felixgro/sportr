@@ -96,7 +96,7 @@ class SportController extends Controller
      */
     public function destroy(Sport $sport)
     {
-        $this->authorize('edit-sport');
+        $this->authorize('delete-sport');
 
         $sport->delete();
 

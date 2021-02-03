@@ -22,22 +22,39 @@ return [
     | Each Role has a title and permissions. You can also define
     | an optional inherit property to obtain permissions of a different role.
     |
+    | Available permissions
+    | Sport:  edit-sport / delete-sport
+    | Teams:  edit-team  / delete-team
+    | Events: remember-event / edit-event / delete-event
+    | Other:  assign-role / view-dashboard
     */
 
     'all' => [
         [
             'role' => 'user',
-            'permissions' => []
+            'permissions' => [
+                'remember-event'
+            ]
         ],
         [
             'role' => 'moderator',
-            'permissions' => ['edit-event', 'edit-team'],
-            'inherit' => 'user'
+            'inherit' => 'user',
+            'permissions' => [
+                'edit-sport',
+                'edit-team',
+                'edit-event',
+                'delete-event'
+            ]
         ],
         [
             'role' => 'admin',
-            'permissions' => ['view-dashboard', 'edit-role', 'edit-sport'],
-            'inherit' => 'moderator'
+            'inherit' => 'moderator',
+            'permissions' => [
+                'view-dashboard',
+                'assign-role',
+                'delete-sport',
+                'delete-team'
+            ]
         ]
     ]
 ];
