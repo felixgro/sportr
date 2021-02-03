@@ -28,8 +28,13 @@ php artisan serve
 Check out the [Setup Guide](docs/SetupGuide.md) for detailed instructions on how to manually setup Sportr on your machine.
 
 ## Testing
-You can find all tests in the `tests/` directory.
+You can find all tests in the `tests/` directory. By default tests will use a seperate database connection defined in the `env.testing` file. Feel free to change this file to your needs.
 
-Run tests using the `php artisan test` or `composer test` command in the terminal.
+Run the test suite using one of the following commands:
+```
+composer test
+php artisan test
+vendor/bin/phpunit
+```
 
 Pull-Requests get automatically built and tested by [Travis-CI](https://www.travis-ci.com).
