@@ -24,7 +24,7 @@ class RoleService
      */
     public function isReady()
     {
-        return !Role::all()->isEmpty();
+        return ! Role::all()->isEmpty();
     }
 
     /**
