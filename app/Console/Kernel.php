@@ -2,8 +2,7 @@
 
 namespace App\Console;
 
-use App\Console\Commands\ResetCommand;
-use App\Console\Commands\SetupCommand;
+use App\Console\Commands\{ResetCommand, SetupCommand, SeedCommand};
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         SetupCommand::class,
-        ResetCommand::class
+        ResetCommand::class,
+        SeedCommand::class
     ];
 
     /**
