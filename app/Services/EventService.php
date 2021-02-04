@@ -103,7 +103,7 @@ class EventService
 	 * @param  mixed $location
 	 * @return \App\Models\Location
 	 */
-	private function getLocationModel(mixed $location)
+	private function getLocationModel($location)
 	{
 		if (is_int($location)) {
 			return Location::find($location);
