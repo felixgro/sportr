@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Location\CreateLocation;
+use App\Http\Requests\Location\EditLocation;
 use App\Models\Location;
-use App\Http\Requests\Location\{CreateLocation, EditLocation};
-use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
