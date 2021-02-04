@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Event, Sport};
+use App\Http\Requests\Event\CreateEvent;
+use App\Http\Requests\Event\EditEvent;
+use App\Models\Event;
+use App\Models\Sport;
 use Facades\App\Services\EventService;
-use App\Http\Requests\Event\{CreateEvent, EditEvent};
-
 
 class SportEventController extends Controller
 {

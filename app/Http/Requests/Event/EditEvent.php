@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Event;
 
-use App\Models\Location;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EditEvent extends FormRequest
