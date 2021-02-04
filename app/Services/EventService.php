@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\{Event, Location, Team, Sport};
+use App\Models\Event;
+use App\Models\Location;
+use App\Models\Sport;
+use App\Models\Team;
 
 class EventService
 {
