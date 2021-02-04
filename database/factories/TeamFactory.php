@@ -2,7 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\{Sport, Team};
+use App\Models\Sport;
+use App\Models\Team;
 use Database\Factories\Providers\TeamNameProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
