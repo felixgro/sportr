@@ -43,7 +43,7 @@ class Sport extends Model
      */
     public function updateWithOptionalIcon($attr)
     {
-        if (! $attr['icon']) {
+        if (!$attr['icon']) {
             unset($attr['icon']);
         } else {
             // delete old icon
@@ -80,7 +80,17 @@ class Sport extends Model
     }
 
     /**
-     * Get relative path of icon for storage facade.
+     * Appends the sport's route to each sport model.
+     *
+     * @return string
+     */
+    public function getRouteAttribute()
+    {
+        return "/sports/{$this->id}";
+    }
+
+    /**
+     * Returns relative path of icon for storage facade.
      *
      * @return string
      */

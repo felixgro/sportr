@@ -17,7 +17,7 @@ class SportController extends Controller
     public function index()
     {
         return Inertia::render('Sport/Index', [
-            'sports' => fn () => Sport::all()
+            'sports' => fn () => Sport::all()->append('route')
         ]);
     }
 
@@ -47,14 +47,18 @@ class SportController extends Controller
     }
 
     /**
-     * Display the specified sport.
+     * Display the specified sport alogn
+     * with its related events and teams.
      *
      * @param  \App\Models\Sport  $sport
      * @return \Inertia\Response
      */
     public function show(Sport $sport)
     {
-        return Sport::find($sport->id)->with('teams')->first();
+        return Inertia::render('Sport/Show', [
+            'sport' => $sport->append('route')
+                ->load(['teams', 'events'])
+        ]);
     }
 
     /**
@@ -68,7 +72,9 @@ class SportController extends Controller
         $this->authorize('edit-sport');
 
         return Inertia::render('Sport/Edit', [
-            'sport' => fn () => $sport->only('id', 'title', 'icon')
+            'sport' => fn () => $sport->only('id', 'title', 'icon', 'route'),
+            'totalTeams' => fn () => $sport->teams->count(),
+            'totalEvents' => fn () => $sport->events->count()
         ]);
     }
 
