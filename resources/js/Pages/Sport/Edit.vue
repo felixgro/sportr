@@ -41,9 +41,14 @@
 					Once a sport is deleted, all of its teams and events will be permanently deleted as well.
 					Before deleting this sport, please consider downloading any data or information that you wish to retain.
 					<div class="mt-3">
-						<inertia-link href="/sports/1/teams" class="font-bold">12 Teams</inertia-link> and
-						<inertia-link href="/sports/1/events" class="font-bold">5 Events</inertia-link> are currently
-						related to this sport.
+						<span v-if="totalTeams > 0">
+							<inertia-link :href="sport.route + '/teams'" class="font-bold">{{ relatedTeams }}</inertia-link>
+						</span>
+						<span v-if="totalEvents > 0">
+							and <inertia-link :href="sport.route + '/events'" class="font-bold">{{ relatedEvents }}</inertia-link>
+						</span>
+						<span v-if="noRelations">Nothing</span>
+						{{ verb }} currently related to this sport.
 					</div>
 				</div>
 			</template>
@@ -81,7 +86,7 @@ export default {
 		JetConfirmsPassword
 	},
 
-	props: ['sport'],
+	props: ['sport', 'totalTeams', 'totalEvents'],
 
 	data() {
 		return {
@@ -90,6 +95,24 @@ export default {
 				title: '',
 				icon: null
 			})
+		}
+	},
+
+	computed: {
+		noRelations() {
+			return this.totalEvents == 0 && this.totalTeams == 0
+		},
+
+		relatedTeams() {
+			return this.totalTeams + " " + (this.totalTeams > 1 ? ' Teams' : ' Team')
+		},
+
+		relatedEvents() {
+			return this.totalEvents + " " + (this.totalEvents > 1 ? ' Events' : ' Event')
+		},
+
+		verb() {
+			return this.noRelations || (this.totalEvents == 0 && this.totalTeams == 1) ? 'is' : 'are'
 		}
 	},
 
