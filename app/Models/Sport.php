@@ -43,7 +43,7 @@ class Sport extends Model
      */
     public function updateWithOptionalIcon($attr)
     {
-        if (!$attr['icon']) {
+        if (! $attr['icon']) {
             unset($attr['icon']);
         } else {
             // delete old icon
