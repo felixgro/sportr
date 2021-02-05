@@ -10,12 +10,17 @@ use Illuminate\Database\Seeder;
 class EventSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Generate Events and assigns each event
+     * two teams of the different sport.
      *
+     * @param  int $amount
      * @return void
      */
     public function run(int $amount = 10)
     {
+        // Limit max Amount to 50 to prevent duplicate entry for unique title key of teams
+        $amount = $amount <= 50 ? $amount : 50;
+
         while ($amount > 0) {
             $sport = Sport::inRandomOrder()->first();
 

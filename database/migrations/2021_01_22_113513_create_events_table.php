@@ -26,6 +26,8 @@ class CreateEventsTable extends Migration
                 ->onDelete('cascade');
 
             $table->timestamp('date');
+
+            $table->index(['date']);
         });
     }
 
