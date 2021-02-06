@@ -41,6 +41,6 @@ class EventNameProvider extends Base
 	 */
 	public function eventNoun()
 	{
-		return ucWords(static::randomElement($this->nouns));
+		return ucwords(static::randomElement($this->nouns));
 	}
 }
