@@ -11,7 +11,7 @@ use Tests\TestCase;
 class EventTest extends TestCase
 {
 
-    private $role = 'admin';
+    private $role = 'moderator';
 
     /** @test */
     public function events_view_can_be_rendered()
@@ -34,6 +34,8 @@ class EventTest extends TestCase
     /** @test */
     public function create_event_view_can_be_rendered()
     {
+        $this->signIn($this->role);
+
         $sport = Sport::inRandomOrder()->first();
 
         $this->get(route('sportevents.create', $sport))
@@ -43,6 +45,8 @@ class EventTest extends TestCase
     /** @test */
     public function edit_event_view_can_be_rendered()
     {
+        $this->signIn($this->role);
+
         $event = Event::factory()->create();
 
         $this->get(route('sportevents.edit', [$event->sport, $event]))

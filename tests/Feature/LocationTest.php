@@ -8,7 +8,7 @@ use Tests\TestCase;
 class LocationTest extends TestCase
 {
 
-    private $role = 'admin';
+    private $role = 'moderator';
 
     /** @test */
     public function location_list_can_be_requested_in_json_format()
@@ -23,6 +23,8 @@ class LocationTest extends TestCase
     /** @test */
     public function create_location_view_can_be_rendered()
     {
+        $this->signIn($this->role);
+
         $this->get(route('locations.create'))
             ->assertStatus(200);
     }
@@ -30,6 +32,8 @@ class LocationTest extends TestCase
     /** @test */
     public function edit_location_view_can_be_rendered()
     {
+        $this->signIn($this->role);
+
         $location = Location::factory()->create();
 
         $this->get(route('locations.edit', $location))

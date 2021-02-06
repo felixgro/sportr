@@ -7,7 +7,7 @@ use Tests\TestCase;
 class AdminRoleTest extends TestCase
 {
 	/** @test */
-	public function admins_can_view_dashboard()
+	public function admin_can_view_dashboard()
 	{
 		$this->signIn('admin');
 
