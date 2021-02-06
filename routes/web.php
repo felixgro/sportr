@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\Pages\DashboardController;
+use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\SportController;
 use App\Http\Controllers\SportEventController;
 use App\Http\Controllers\SportTeamController;
-use App\Http\Controllers\Pages\DashboardController;
-use App\Http\Controllers\Pages\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 Route::get('/', HomeController::class)->name('home');
 Route::get('/dashboard', DashboardController::class)->name('dashboard');
