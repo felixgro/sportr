@@ -6,10 +6,20 @@ use Faker\Provider\Base;
 
 class EventNameProvider extends Base
 {
+	/**
+	 * Event places for random prefix.
+	 *
+	 * @var array
+	 */
 	protected $places = [
 		'world', 'european', 'american', 'asian'
 	];
 
+	/**
+	 * Event nouns for random suffix.
+	 *
+	 * @var array
+	 */
 	protected $nouns = [
 		'cup', 'championship', 'tournament', 'battle', 'finals', 'olympics',
 	];
