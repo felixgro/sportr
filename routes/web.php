@@ -4,9 +4,9 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SportController;
 use App\Http\Controllers\SportEventController;
 use App\Http\Controllers\SportTeamController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\Pages\DashboardController;
+use App\Http\Controllers\Pages\HomeController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +19,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Home');
-})->name('home');
 
-// Only for Authorization Testing
-Route::get('/dashboard', [TestController::class, 'dashboard'])->name('dashboard');
+Route::get('/', HomeController::class)->name('home');
+Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
 // Sport routes
 Route::resource('sports', SportController::class);
