@@ -25,7 +25,9 @@ class LocationController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('edit-event');
+
+        return 'TODO: Create Location..';
     }
 
     /**
@@ -60,7 +62,9 @@ class LocationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->authorize('edit-event');
+
+        return 'TODO: Edit Event';
     }
 
     /**
@@ -85,7 +89,7 @@ class LocationController extends Controller
      */
     public function destroy(Location $location)
     {
-        $this->authorize('edit-event');
+        $this->authorize('delete-event');
 
         $location->delete();
 

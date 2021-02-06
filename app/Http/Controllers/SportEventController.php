@@ -27,6 +27,8 @@ class SportEventController extends Controller
      */
     public function create(Sport $sport)
     {
+        $this->authorize('edit-event');
+
         return 'TODO: Form for creating a new Event';
     }
 
@@ -64,6 +66,8 @@ class SportEventController extends Controller
      */
     public function edit(Sport $sport, Event $event)
     {
+        $this->authorize('edit-event');
+
         return 'TODO: Form for editing an existing event';
     }
 
