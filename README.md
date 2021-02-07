@@ -5,6 +5,8 @@
 A clean & user-friendly sport event app for the web.
 Built on Laravel 8, InteriaJs and VueJs.
 
+Frontend currently under contruction. 🏗️
+
 ## Setup
 ##### Prerequisites:
 - PHP 7.4, 8.x
