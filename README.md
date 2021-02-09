@@ -5,6 +5,8 @@
 A clean & user-friendly sport event app for the web.
 Built on Laravel 8, InteriaJs and VueJs.
 
+This project should demonstrate my Laravel and Vue skills.
+
 Frontend currently under contruction. 🏗️
 
 ## Setup
