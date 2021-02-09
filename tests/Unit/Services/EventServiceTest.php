@@ -2,7 +2,9 @@
 
 namespace Tests\Unit\Services;
 
+use App\Models\Location;
 use App\Models\Sport;
+use App\Models\Team;
 use App\Services\EventService;
 use Tests\TestCase;
 
@@ -28,9 +30,9 @@ class EventServiceTest extends TestCase
 			]
 		];
 
-		$res = $this->callMethod(new EventService(), 'getTeamModels', [$sport, $teamsArray]);
+		$returnVal = $this->callMethod(new EventService(), 'getTeamModels', [$sport, $teamsArray]);
 
-		$this->assertInstanceOf('App\Models\Team', $res->first());
+		$this->assertInstanceOf('App\Models\Team', $returnVal->first());
 
 		$this->assertDatabaseHas('teams', [
 			'title' => 'Test Team 1',
@@ -44,6 +46,29 @@ class EventServiceTest extends TestCase
 	}
 
 	/** @test */
+	public function event_service_can_add_existing_team()
+	{
+		$sport = Sport::inRandomOrder()->first();
+		$teams = Team::factory()->for($sport)->count(2)->create();
+
+		$teamsArray = [
+			[
+				'id' => $teams[0]->id,
+				'score' => 5
+			],
+			[
+				'id' => $teams[1]->id,
+				'score' => 2
+			]
+		];
+
+		$returnVal = $this->callMethod(new EventService(), 'getTeamModels', [$sport, $teamsArray]);
+
+		$this->assertInstanceOf('App\Models\Team', $returnVal->first());
+		$this->assertCount(2, $returnVal);
+	}
+
+	/** @test */
 	public function event_serice_can_create_non_existing_location()
 	{
 		$locationData = [
@@ -54,9 +79,9 @@ class EventServiceTest extends TestCase
 			'country' => 'Country here'
 		];
 
-		$res = $this->callMethod(new EventService(), 'getLocationModel', [$locationData]);
+		$returnVal = $this->callMethod(new EventService(), 'getLocationModel', [$locationData]);
 
-		$this->assertInstanceOf('App\Models\Location', $res);
+		$this->assertInstanceOf('App\Models\Location', $returnVal);
 
 		$this->assertDatabaseHas('locations', [
 			'title' => 'Title here',
@@ -65,5 +90,15 @@ class EventServiceTest extends TestCase
 			'city' => 'City here',
 			'country' => 'Country here'
 		]);
+	}
+
+	/** @test */
+	public function event_service_can_add_existing_location()
+	{
+		$location = Location::factory()->create();
+
+		$returnVal = $this->callMethod(new EventService(), 'getLocationModel', [$location->id]);
+
+		$this->assertInstanceOf('App\Models\Location', $returnVal);
 	}
 }
