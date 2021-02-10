@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Ajax\RecentEventController;
+use App\Http\Controllers\Ajax\UpcommingEventController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\HomeController;
@@ -51,6 +53,9 @@ Route::get('sports/{sport}/events/{event}', [SportEventController::class, 'show'
 Route::get('sports/{sport}/events/{event}/edit', [SportEventController::class, 'edit'])->name('sportevents.edit');
 Route::put('sports/{sport}/events/{event}', [SportEventController::class, 'update'])->name('sportevents.update');
 Route::delete('sports/{sport}/events/{event}', [SportEventController::class, 'destroy'])->name('sportevents.destroy');
+
+Route::get('recentevents', RecentEventController::class)->name('recentevents');
+Route::get('upcommingevents', UpcommingEventController::class)->name('upcommingevents');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
