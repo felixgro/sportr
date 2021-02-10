@@ -36,7 +36,7 @@ class TeamFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->unique(true)->team,
+            'title' => $this->faker->unique()->team,
             'sport_id' => Sport::all()->random()->id
         ];
     }
