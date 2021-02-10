@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+	@variants hover, focus, group-hover, group-focus {
+		.filter-invert-none {
+			filter: invert(0);
+		}
+		.filter-invert-full {
+			filter: invert(100%);
+		}
+	}
+}

@@ -1,5 +1,6 @@
 <template>
-	<header class="bg-gray-100 border-b border-none shadow-md">
+	<header class="border-b border-none fixed top-0 left-0 h-16 transform scale-y-0 heigh w-full bg-gray-100 z-30 origin-top overflow-hidden transition duration-180 ease-out"
+	:class="this.value && 'scale-y-100'" :aria-hidden="!this.value">
 
 		<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -69,8 +70,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- Bottom Section -->
-			<the-searchbar />
 		</nav>
 	</header>
 </template>
@@ -78,7 +77,6 @@
 <script>
 import TheLogo from '@/Components/Main/TheLogo'
 import NavLink from '@/Components/NavLink'
-import TheSearchbar from '@/Components/Main/TheSearchbar'
 import Dropdown from '@/Components/Dropdown'
 
 import { mainNavigationItems } from '@/config/navigation.js'
@@ -90,9 +88,10 @@ export default {
 		NavLink,
 		TheLogo,
 		Dropdown,
-		TheSearchbar,
 		JetDropdownLink
 	},
+
+	props: ['value'],
 
 	data() {
 		return {
