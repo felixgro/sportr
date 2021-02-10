@@ -13,12 +13,12 @@ class TeamNameProvider extends Base
      */
     protected $creatures = [
         'ants', 'bats', 'bears', 'bees', 'birds', 'buffalo', 'cats', 'chickens',
-        'cattle', 'dogs', 'dolphins', 'ducks', 'elephants', 'fishes', 'foxes',
+        'cattle', 'dogs', 'dolphins', 'ducks', 'dwarfs', 'elephants', 'fishes', 'foxes',
         'frogs', 'geese', 'goats', 'horses', 'kangaroos', 'lions', 'monkeys',
-        'owls', 'oxen', 'penguins', 'people', 'pigs', 'rabbits', 'sheep', 'tigers',
+        'owls', 'oxen', 'penguins', 'people', 'pigs', 'pioneers', 'rabbits', 'sheep', 'tigers',
         'whales', 'wolves', 'zebras', 'banshees', 'crows', 'black cats', 'chimeras',
         'ghosts', 'conspirators', 'dragons', 'dwarfs', 'elves', 'enchanters', 'exorcists',
-        'sons', 'foes', 'giants', 'gnomes', 'goblins', 'gooses', 'griffins', 'lycanthropes',
+        'sharks', 'sons', 'foes', 'giants', 'gnomes', 'goblins', 'gooses', 'griffins', 'lycanthropes',
         'nemesis', 'ogres', 'oracles', 'prophets', 'sorcerers', 'spiders', 'spirits', 'vampires',
         'warlocks', 'vixens', 'werewolves', 'witches', 'worshipers', 'zombies', 'druids'
     ];
