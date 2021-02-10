@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class RecentEventController extends Controller
 {
-	public function __invoke(Request $request)
-	{
-		return Event::scored()
-			->orderBy('date', 'desc')
-			->with(['sport', 'teams', 'location'])
-			->paginate(4);
-	}
+    public function __invoke(Request $request)
+    {
+        return Event::scored()
+            ->orderBy('date', 'desc')
+            ->with(['sport', 'teams', 'location'])
+            ->paginate(4);
+    }
 }
