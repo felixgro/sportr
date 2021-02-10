@@ -49,7 +49,30 @@ class Event extends Model
     public function teams()
     {
         return $this->belongsToMany(Team::class)
-            ->as('score')
             ->withPivot('score');
+    }
+
+    /**
+     * Query Scope for events with a defined score.
+     *
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeScored($query)
+    {
+        return $query->whereHas('teams', function ($q) {
+            $q->whereNotNull('score');
+        });
+    }
+
+    /**
+     * Query Scope for upcomming (not yet scored) Events.
+     *
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUpcomming($query)
+    {
+        return $query->whereHas('teams', function ($q) {
+            $q->whereNull('score');
+        });
     }
 }

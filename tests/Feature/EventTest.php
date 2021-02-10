@@ -166,7 +166,7 @@ class EventTest extends TestCase
 
         $this->assertEquals('New Location', $event->location->title);
         $this->assertEquals('Updated Title', $event->title);
-        $this->assertEquals(2, $event->teams->first()->score->score);
+        $this->assertEquals(2, $event->teams->first()->pivot->score);
 
         $this->assertDatabaseMissing('event_team', [
             'team_id' => $teamIds[0],
