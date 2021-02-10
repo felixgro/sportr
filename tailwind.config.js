@@ -21,12 +21,21 @@ module.exports = {
                 gray: colors.blueGray,
                 red: colors.red,
             },
+            typography: {
+                '3xl': {
+                    css: {
+                        fontSize: '3.9rem',
+                    }
+                }
+            }
         },
     },
 
     variants: {
         extend: {
             opacity: ['disabled'],
+            textColor: ['group-focus'],
+            textAlign: ['even']
         },
     },
 
