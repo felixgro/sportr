@@ -1,4 +1,5 @@
 dist: bionic
+os: linux
 
 language: php
 
@@ -14,7 +15,7 @@ cache:
     - vendor
     - node_modules
 
-beforeScript:
+before_script:
   - cp .env.testing .env
   - sudo mysql -e 'create database sportr_test;'
   - composer self-update
