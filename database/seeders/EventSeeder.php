@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Event;
 use App\Models\Team;
-use Illuminate\Database\Seeder;
 use Faker\Factory;
+use Illuminate\Database\Seeder;
 
 class EventSeeder extends Seeder
 {
