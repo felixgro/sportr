@@ -1,6 +1,5 @@
 <template>
-	<header class="border-b border-none fixed top-0 left-0 h-16 transform scale-y-0 heigh w-full bg-gray-100 z-30 origin-top overflow-hidden transition duration-180 ease-out"
-	:class="this.value && 'scale-y-100'" :aria-hidden="!this.value">
+	<header class="border-b border-none fixed top-0 left-0 h-16 heigh w-full bg-gray-100 z-30 shadow-sm">
 
 		<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -16,10 +15,9 @@
 						</inertia-link>
 					</div>
 					<!-- Desktop Navigation Links -->
-					<div class="hidden space-x-4 sm:ml-10 sm:flex">
-						<nav-link v-for="item in navItems" :key="item.route" :toRoute="item.route">
-							{{ item.title }}
-						</nav-link>
+					<div class="ml-5">
+						<portal-target name="breadcrumbs" class="hidden sm:flex items-center" multiple>
+						</portal-target>
 					</div>
 				</div>
 

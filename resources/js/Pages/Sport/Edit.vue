@@ -1,5 +1,11 @@
 <template>
 	<main-layout>
+		<portal to="breadcrumbs">
+            <nav-link toRoute="home">Home</nav-link> <bc-arrow />
+            <nav-link :href="sport.route">{{ sport.title }}</nav-link> <bc-arrow />
+			<nav-link :href="sport.route + '/edit'">Edit</nav-link>
+        </portal>
+
 		<form-section @submitted="submit">
 			<template #title>
 				Edit Sport
@@ -73,6 +79,8 @@ import ImageUpload from '@/Components/Form/ImageUpload'
 import ActionSection from '@/Components/Sections/ActionSection'
 import DangerButton from '@/Components/Form/ButtonDanger'
 import JetConfirmsPassword from '@/Jetstream/ConfirmsPassword'
+import NavLink from '@/Components/NavLink'
+import BcArrow from '@/Components/Icons/BreadcrumbArrow'
 
 export default {
 	components: {
@@ -83,7 +91,9 @@ export default {
 		ImageUpload,
 		ActionSection,
 		DangerButton,
-		JetConfirmsPassword
+		JetConfirmsPassword,
+		NavLink,
+		BcArrow
 	},
 
 	props: ['sport', 'totalTeams', 'totalEvents'],

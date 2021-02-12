@@ -1,11 +1,9 @@
 <template>
     <main-layout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Profile
-            </h2>
-        </template>
-
+        <portal to="breadcrumbs">
+            <nav-link toRoute="home">Home</nav-link> <bc-arrow />
+            <nav-link toRoute="profile.show">Profile</nav-link>
+        </portal>
         <div>
             <div v-if="$page.props.jetstream.canUpdateProfileInformation">
                 <update-profile-information-form :user="$page.props.user" />
@@ -44,6 +42,8 @@ import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
 import UpdatePasswordForm from './UpdatePasswordForm'
 import UpdateProfileInformationForm from './UpdateProfileInformationForm'
 import SectionBorder from '@/Components/Sections/SectionBorder'
+import NavLink from '@/Components/NavLink'
+import BcArrow from '@/Components/Icons/BreadcrumbArrow'
 
 export default {
     props: ['sessions'],
@@ -56,6 +56,8 @@ export default {
         TwoFactorAuthenticationForm,
         UpdatePasswordForm,
         UpdateProfileInformationForm,
+        NavLink,
+        BcArrow
     },
 
     created() {

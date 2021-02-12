@@ -1,13 +1,16 @@
 <template>
   <div class="relative w-full bg-gray-200 py-6 px-8">
 	  <!-- Head Section -->
-	  <div class="flex">
+	  <div class="flex justify-between items-start">
 		  <div>
 			<div class="flex items-center text-gray-800">
 				<img :src="event.sport.icon" class="h-5 mr-3 opacity-80">
 				{{ event.sport.title }}
 			</div>
 			<div class="mt-1 prose-lg font-bold text-gray-800">{{ event.title }}</div>
+		  </div>
+		  <div>
+			  blaa
 		  </div>
 	  </div>
 
@@ -23,14 +26,17 @@
 	  </div>
 
 	  	<!-- Foot Section -->
-	  	<div class="flex justify-between items-center font-bold text-sm">
+	  	<div class="flex justify-between items-end font-bold text-sm">
 		  	<div>
 			  	<div class="bg-main-200 text-center text-main-800 rounded-full w-16 px-1 py-0.5">
 			  		{{ getTime(event.date) }}
 			  	</div>
 			  	<div class="mt-2 text-gray-700">
-				  {{ getDate(event.date) }}, {{ event.location.title }}
+				  {{ getDate(event.date) }}
 				</div>
+			</div>
+			<div class="text-gray-700">
+				{{ event.location.title }}
 			</div>
 		</div>
 
@@ -66,6 +72,7 @@ export default {
 
 			return `${months[d.getMonth()]} ${day} ${d.getFullYear()}`
 		},
+
 		getTime(date) {
 			const d = new Date(date)
 			const minutes = d.getMinutes() < 10 ? `0${d.getMinutes()}` : d.getMinutes();

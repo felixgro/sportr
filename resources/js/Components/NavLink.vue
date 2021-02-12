@@ -1,17 +1,25 @@
 <template>
-    <inertia-link :href="route(toRoute)" :class="classes">
+    <inertia-link :href="url" :class="classes">
         <slot></slot>
     </inertia-link>
 </template>
 
 <script>
 export default {
-    props: ['toRoute'],
+    props: ['toRoute', 'href'],
 
     computed: {
-        active() {
-            return route().current(this.toRoute)
+        url() {
+            return this.toRoute ? route(this.toRoute) : this.href
         },
+
+        active() {
+            if(this.toRoute)
+                return route().current(this.toRoute)
+
+            return window.location.pathname == this.href
+        },
+
         classes() {
             return this.active
                 ? 'inline-flex px-4 py-1 rounded items-center text-sm font-bold leading-5 text-main-800 bg-main-100 focus:outline-none transition duration-150 ease-in-out'
