@@ -5,7 +5,7 @@
 A clean & user-friendly sport event app for the web.
 Built on Laravel 8, InteriaJs and VueJs.
 
-Frontend currently under contruction. 🏗️
+[Database ERD](https://dbdiagram.io/d/5fa92e763a78976d7b7b1af0)
 
 ## Setup
 ##### Prerequisites:
