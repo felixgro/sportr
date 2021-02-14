@@ -45,4 +45,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Role::class);
     }
+
+    /**
+     * Get favorite sports from current user.
+     *
+     * @return
+     */
+    public function favSports()
+    {
+        return $this->belongsToMany(Sport::class);
+    }
 }
