@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Ajax\RecentEventController;
 use App\Http\Controllers\Ajax\UpcommingEventController;
+use App\Http\Controllers\FavoriteSportController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\HomeController;
@@ -10,53 +11,80 @@ use App\Http\Controllers\SportEventController;
 use App\Http\Controllers\SportTeamController;
 use Illuminate\Support\Facades\Route;
 
+
+
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Main Page Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Main Routes for home & dashboard view.
 |
 */
 
 Route::get('/', HomeController::class)->name('home');
 Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-// Sport routes
+
+
+/*
+|--------------------------------------------------------------------------
+| Sport Routes
+|--------------------------------------------------------------------------
+|
+| CRUD routes for sports and all it's related
+| models such as favorite sports, events and teams.
+|
+*/
+
 Route::resource('sports', SportController::class);
 
-// Sport team routes
-Route::get('sports/{sport}/teams', [SportTeamController::class, 'index'])->name('sportteams.index');
-Route::get('sports/{sport}/teams/create', [SportTeamController::class, 'create'])->name('sportteams.create');
-Route::post('sports/{sport}/teams', [SportTeamController::class, 'store'])->name('sportteams.store');
-Route::get('sports/{sport}/teams/{team}', [SportTeamController::class, 'show'])->name('sportteams.show');
-Route::get('sports/{sport}/teams/{team}/edit', [SportTeamController::class, 'edit'])->name('sportteams.edit');
-Route::put('sports/{sport}/teams/{team}', [SportTeamController::class, 'update'])->name('sportteams.update');
-Route::delete('sports/{sport}/teams/{team}', [SportTeamController::class, 'destroy'])->name('sportteams.destroy');
+Route::prefix('favsports')->middleware('auth:sanctum')->name('favsports.')->group(function () {
+	Route::get('/',  [FavoriteSportController::class, 'index'])->name('index');
+	Route::post('/', [FavoriteSportController::class, 'store'])->name('store');
+	Route::put('/',  [FavoriteSportController::class, 'update'])->name('update');
+});
 
-// Location routes
-Route::get('locations', [LocationController::class, 'index'])->name('locations.index');
-Route::get('locations/create', [LocationController::class, 'create'])->name('locations.create');
-Route::post('locations', [LocationController::class, 'store'])->name('locations.store');
-Route::get('locations/{location}', [LocationController::class, 'show'])->name('locations.show');
-Route::get('locations/{location}/edit', [LocationController::class, 'edit'])->name('locations.edit');
-Route::put('locations/{location}', [LocationController::class, 'update'])->name('locations.update');
-Route::delete('locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
+Route::prefix('sports/{sport}/teams')->name('sportteams.')->group(function () {
+	Route::get('/', [SportTeamController::class, 'index'])->name('index');
+	Route::get('create', [SportTeamController::class, 'create'])->name('create');
+	Route::get('{team}', [SportTeamController::class, 'show'])->name('show');
+	Route::get('{team}/edit', [SportTeamController::class, 'edit'])->name('edit');
+	Route::post('/', [SportTeamController::class, 'store'])->name('store');
+	Route::put('{team}', [SportTeamController::class, 'update'])->name('update');
+	Route::delete('{team}', [SportTeamController::class, 'destroy'])->name('destroy');
+});
 
-// Sport event routes
-Route::get('sports/{sport}/events', [SportEventController::class, 'index'])->name('sportevents.index');
-Route::get('sports/{sport}/events/create', [SportEventController::class, 'create'])->name('sportevents.create');
-Route::post('sports/{sport}/events', [SportEventController::class, 'store'])->name('sportevents.store');
-Route::get('sports/{sport}/events/{event}', [SportEventController::class, 'show'])->name('sportevents.show');
-Route::get('sports/{sport}/events/{event}/edit', [SportEventController::class, 'edit'])->name('sportevents.edit');
-Route::put('sports/{sport}/events/{event}', [SportEventController::class, 'update'])->name('sportevents.update');
-Route::delete('sports/{sport}/events/{event}', [SportEventController::class, 'destroy'])->name('sportevents.destroy');
+Route::prefix('sports/{sport}/events')->name('sportevents.')->group(function () {
+	Route::get('/', [SportEventController::class, 'index'])->name('index');
+	Route::get('create', [SportEventController::class, 'create'])->name('create');
+	Route::get('{event}', [SportEventController::class, 'show'])->name('show');
+	Route::get('{event}/edit', [SportEventController::class, 'edit'])->name('edit');
+	Route::post('/', [SportEventController::class, 'store'])->name('store');
+	Route::put('{event}', [SportEventController::class, 'update'])->name('update');
+	Route::delete('{event}', [SportEventController::class, 'destroy'])->name('destroy');
+});
 
 Route::get('recentevents', RecentEventController::class)->name('recentevents');
 Route::get('upcommingevents', UpcommingEventController::class)->name('upcommingevents');
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->name('dashboard');
+
+
+/*
+|--------------------------------------------------------------------------
+| Location Routes
+|--------------------------------------------------------------------------
+|
+| CRUD routes for event locations.
+|
+*/
+
+Route::prefix('locations')->name('locations.')->group(function () {
+	Route::get('/', [LocationController::class, 'index'])->name('index');
+	Route::get('create', [LocationController::class, 'create'])->name('create');
+	Route::post('/', [LocationController::class, 'store'])->name('store');
+	Route::get('{location}', [LocationController::class, 'show'])->name('show');
+	Route::get('{location}/edit', [LocationController::class, 'edit'])->name('edit');
+	Route::put('{location}', [LocationController::class, 'update'])->name('update');
+	Route::delete('{location}', [LocationController::class, 'destroy'])->name('destroy');
+});
