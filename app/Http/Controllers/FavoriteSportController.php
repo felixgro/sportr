@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Sport;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class FavoriteSportController extends Controller
 {
@@ -14,7 +16,12 @@ class FavoriteSportController extends Controller
      */
     public function index()
     {
-        return Auth::user()->favSports->pluck('id');
+        if (!session('freshlyRegistered') && Auth::user()->favSports->count() !== 0)
+            return redirect()->route('home');
+
+        return Inertia::render('Auth/ChooseSports', [
+            'sports' => fn () => Sport::all(['id', 'title', 'icon'])
+        ]);
     }
 
     /**
