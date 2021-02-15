@@ -23,11 +23,11 @@ npm run dev
 ```
 
 ### Step 2: Prepare `.env` file
-Start by duplicating and renaming the `.env.example` file:
+Start by duplicating and renaming the `.env.example` file to `.env`:
 ```
 cp .env.example .env
 ```
-Setup a MySQL database and enter the correct credentials in the `.env` file:
+Setup a MySQL database and enter the correct credentials in the new `.env` file:
 ```
 ...
 DB_CONNECTION=mysql
@@ -50,8 +50,13 @@ php artisan migrate
 php artisan db:seed
 ```
 
+optionally: Seed database with fake data:
+```
+php artisan sportr:seed
+```
+
 ### Step 4: Prepare public storage
-Link the `storage/public` directory to `public/storage` to serve assets public.
+Link the `storage/public` directory to `public/storage` to serve public assets.
 ```
 php artisan storage:link
 ```
