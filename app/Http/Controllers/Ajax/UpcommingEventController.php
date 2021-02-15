@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UpcommingEventController extends Controller
 {
-
     /**
      * Get upcomming future events. If an authenticated user
      * exists filter events based on favorite sports.
