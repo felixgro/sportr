@@ -25,7 +25,7 @@ class RegistrationTest extends TestCase
             'email' => $userData['email'],
             'password' => $userData['password'],
             'terms' => true,
-        ])->assertRedirect(RouteServiceProvider::HOME);
+        ])->assertRedirect(route('favsports.index'));
 
         $this->assertAuthenticated();
     }
