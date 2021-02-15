@@ -7,30 +7,25 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\SportController;
-use App\Http\Controllers\SportEventController;
-use App\Http\Controllers\SportTeamController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
-| Main Page Routes
+| Main App Routes
 |--------------------------------------------------------------------------
-|
-| Main Routes for home & dashboard view.
-|
 */
 
 Route::get('/', HomeController::class)->name('home');
 Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
+
 /*
 |--------------------------------------------------------------------------
 | Sport Routes
 |--------------------------------------------------------------------------
-|
-| CRUD routes for sports and all it's related
-| models such as favorite sports, events and teams.
-|
 */
 
 Route::resource('sports', SportController::class);
@@ -41,36 +36,48 @@ Route::prefix('favsports')->middleware('auth:sanctum')->name('favsports.')->grou
     Route::put('/', [FavoriteSportController::class, 'update'])->name('update');
 });
 
-Route::prefix('sports/{sport}/teams')->name('sportteams.')->group(function () {
-    Route::get('/', [SportTeamController::class, 'index'])->name('index');
-    Route::get('create', [SportTeamController::class, 'create'])->name('create');
-    Route::get('{team}', [SportTeamController::class, 'show'])->name('show');
-    Route::get('{team}/edit', [SportTeamController::class, 'edit'])->name('edit');
-    Route::post('/', [SportTeamController::class, 'store'])->name('store');
-    Route::put('{team}', [SportTeamController::class, 'update'])->name('update');
-    Route::delete('{team}', [SportTeamController::class, 'destroy'])->name('destroy');
-});
+
+/*
+|--------------------------------------------------------------------------
+| Event Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::prefix('sports/{sport}/events')->name('sportevents.')->group(function () {
-    Route::get('/', [SportEventController::class, 'index'])->name('index');
-    Route::get('create', [SportEventController::class, 'create'])->name('create');
-    Route::get('{event}', [SportEventController::class, 'show'])->name('show');
-    Route::get('{event}/edit', [SportEventController::class, 'edit'])->name('edit');
-    Route::post('/', [SportEventController::class, 'store'])->name('store');
-    Route::put('{event}', [SportEventController::class, 'update'])->name('update');
-    Route::delete('{event}', [SportEventController::class, 'destroy'])->name('destroy');
+    Route::get('/', [EventController::class, 'index'])->name('index');
+    Route::get('create', [EventController::class, 'create'])->name('create');
+    Route::get('{event}', [EventController::class, 'show'])->name('show');
+    Route::get('{event}/edit', [EventController::class, 'edit'])->name('edit');
+    Route::post('/', [EventController::class, 'store'])->name('store');
+    Route::put('{event}', [EventController::class, 'update'])->name('update');
+    Route::delete('{event}', [EventController::class, 'destroy'])->name('destroy');
 });
 
 Route::get('recentevents', RecentEventController::class)->name('recentevents');
 Route::get('upcommingevents', UpcommingEventController::class)->name('upcommingevents');
 
+
+/*
+|--------------------------------------------------------------------------
+| Team Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('sports/{sport}/teams')->name('sportteams.')->group(function () {
+    Route::get('/', [TeamController::class, 'index'])->name('index');
+    Route::get('create', [TeamController::class, 'create'])->name('create');
+    Route::get('{team}', [TeamController::class, 'show'])->name('show');
+    Route::get('{team}/edit', [TeamController::class, 'edit'])->name('edit');
+    Route::post('/', [TeamController::class, 'store'])->name('store');
+    Route::put('{team}', [TeamController::class, 'update'])->name('update');
+    Route::delete('{team}', [TeamController::class, 'destroy'])->name('destroy');
+});
+
+
 /*
 |--------------------------------------------------------------------------
 | Location Routes
 |--------------------------------------------------------------------------
-|
-| CRUD routes for event locations.
-|
 */
 
 Route::prefix('locations')->name('locations.')->group(function () {
