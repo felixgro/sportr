@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class RecentEventController extends Controller
 {
-
     /**
      * Get recently scored events. If an authenticated user
      * exists filter events based on favorite sports.

@@ -2,15 +2,14 @@
 
 use App\Http\Controllers\Ajax\RecentEventController;
 use App\Http\Controllers\Ajax\UpcommingEventController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\FavoriteSportController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\SportController;
-use App\Http\Controllers\EventController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 Route::get('/dashboard', DashboardController::class)->name('dashboard');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +33,6 @@ Route::prefix('favsports')->middleware('auth:sanctum')->name('favsports.')->grou
     Route::post('/', [FavoriteSportController::class, 'store'])->name('store');
     Route::put('/', [FavoriteSportController::class, 'update'])->name('update');
 });
-
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +53,6 @@ Route::prefix('sports/{sport}/events')->name('sportevents.')->group(function () 
 Route::get('recentevents', RecentEventController::class)->name('recentevents');
 Route::get('upcommingevents', UpcommingEventController::class)->name('upcommingevents');
 
-
 /*
 |--------------------------------------------------------------------------
 | Team Routes
@@ -72,7 +68,6 @@ Route::prefix('sports/{sport}/teams')->name('sportteams.')->group(function () {
     Route::put('{team}', [TeamController::class, 'update'])->name('update');
     Route::delete('{team}', [TeamController::class, 'destroy'])->name('destroy');
 });
-
 
 /*
 |--------------------------------------------------------------------------
