@@ -8,7 +8,7 @@ use App\Models\Event;
 use App\Models\Sport;
 use Facades\App\Services\EventService;
 
-class SportEventController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.

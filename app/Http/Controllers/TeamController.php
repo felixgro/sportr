@@ -8,7 +8,7 @@ use App\Models\Sport;
 use App\Models\Team;
 use Inertia\Inertia;
 
-class SportTeamController extends Controller
+class TeamController extends Controller
 {
     /**
      * Show all teams of a given sport.
