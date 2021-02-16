@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Ajax\RecentEventController;
+use App\Http\Controllers\Ajax\SearchSuggestionController;
 use App\Http\Controllers\Ajax\UpcommingEventController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FavoriteSportController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\SportController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+/*
+|--------------------------------------------------------------------------
+| Search Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/search', SearchSuggestionController::class)->middleware('ajax')->name('search');
+
+// SEARCH TEST ROUTE
+Route::get('/s', function () {
+    return Inertia::render('SearchTest');
+});
 
 /*
 |--------------------------------------------------------------------------
