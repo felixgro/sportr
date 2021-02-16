@@ -16,7 +16,7 @@ class Ajax
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->ajax()) {
+        if (! $request->ajax()) {
             abort(404);
         }
 
