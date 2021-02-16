@@ -9,43 +9,55 @@ use Illuminate\Support\Facades\DB;
 class SearchSuggestionController extends Controller
 {
     /**
-     * tba.
+     * Gets all search results based on a client's
+     * query q received via GET request.
      *
-     * @return string
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(Request $request)
     {
-        $q = $request->get('q');
-
-        $query = '';
-
-        foreach (explode(' ', $q) as $word) {
-            if (!empty($query)) {
-                $query .= ' ';
-            }
-
-            $query .= "+{$word}*";
-        }
-
-        $events = DB::select(
-            'SELECT id, title FROM events WHERE MATCH(title) AGAINST(? IN BOOLEAN MODE)',
-            [$query]
-        );
-
-        $sports = DB::select(
-            'SELECT id, title FROM sports WHERE MATCH(title) AGAINST(? IN BOOLEAN MODE)',
-            [$query]
-        );
-
-        $teams = DB::select(
-            'SELECT id, title FROM teams WHERE MATCH(title) AGAINST(? IN BOOLEAN MODE)',
-            [$query]
-        );
+        $query = $this->assignBooleanOperators($request->get('q'));
 
         return response()->json([
-            'events' => $events,
-            'sports' => $sports,
-            'teams' => $teams
+            'events' => $this->getSearchResultsFor('events', $query),
+            'sports' => $this->getSearchResultsFor('sports', $query),
+            'teams'  => $this->getSearchResultsFor('teams', $query)
         ]);
+    }
+
+    /**
+     * Assigns boolean operators for searching using a
+     * fulltext index in boolean mode by wraping each word
+     * in between + and *.
+     *
+     * @param  string  $searchTerm
+     * @return string
+     */
+    private function assignBooleanOperators(string $searchTerm)
+    {
+        return implode('', array_map(fn ($e) => "+{$e}*", explode(' ', $searchTerm)));
+    }
+
+    /**
+     * Sends fulltext search request to mysql and returns an
+     * array of all correlating results.
+     *
+     * Since the table property gets directly injected in the raw
+     * sql query it should never contain any sort of user input. Only call
+     * this method by directly passing a plain string as a table parameter.
+     * f.e: $this->getSearchResultsFor('events', $query)
+     * NOT: $this->getSearchResultsFor($userDefinedVar, $query)
+     *
+     * @param  string $table
+     * @param  string $query
+     * @param  string $col
+     * @return array
+     */
+    private function getSearchResultsFor(string $table, string $query)
+    {
+        return DB::select(
+            "SELECT id, title FROM {$table} WHERE MATCH(title) AGAINST(? IN BOOLEAN MODE)",
+            [$query]
+        );
     }
 }
