@@ -50,7 +50,6 @@ class SearchSuggestionController extends Controller
      *
      * @param  string $table
      * @param  string $query
-     * @param  string $col
      * @return array
      */
     private function getSearchResultsFor(string $table, string $query)
