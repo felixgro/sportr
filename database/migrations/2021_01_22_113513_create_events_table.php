@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateEventsTable extends Migration
@@ -29,6 +30,9 @@ class CreateEventsTable extends Migration
 
             $table->index(['date']);
         });
+
+        // Add Fulltext Index to title column.
+        DB::statement('ALTER TABLE events ADD FULLTEXT(title)');
     }
 
     /**
