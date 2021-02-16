@@ -21,6 +21,9 @@ class CreateTeamsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
+
+        // Add Fulltext Index to title column.
+        DB::statement('ALTER TABLE teams ADD FULLTEXT(title)');
     }
 
     /**

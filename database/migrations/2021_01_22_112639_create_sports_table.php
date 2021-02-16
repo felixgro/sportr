@@ -18,6 +18,9 @@ class CreateSportsTable extends Migration
             $table->string('title')->unique();
             $table->string('icon');
         });
+
+        // Add Fulltext Index to title column.
+        DB::statement('ALTER TABLE sports ADD FULLTEXT(title)');
     }
 
     /**
