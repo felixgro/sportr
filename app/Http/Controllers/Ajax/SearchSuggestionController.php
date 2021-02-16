@@ -43,8 +43,9 @@ class SearchSuggestionController extends Controller
      * array of all correlating results.
      *
      * Since the table property gets directly injected in the raw
-     * sql query it should never contain any sort of user input. Only call
-     * this method by directly passing a plain string as a table parameter.
+     * sql query string it should never contain any sort of user defined input.
+     * Only call this method by directly passing a plain string as a table parameter.
+     *
      * f.e: $this->getSearchResultsFor('events', $query)
      * NOT: $this->getSearchResultsFor($userDefinedVar, $query)
      *
