@@ -53,6 +53,16 @@ class Event extends Model
     }
 
     /**
+     * Get reports.
+     *
+     * @return Illuminate\Support\Collection
+     */
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+
+    /**
      * Query Scope for events with a defined score.
      *
      * @return Illuminate\Database\Eloquent\Builder
