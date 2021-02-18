@@ -8,6 +8,7 @@ use App\Http\Controllers\FavoriteSportController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\HomeController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SportController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -98,4 +99,16 @@ Route::prefix('locations')->name('locations.')->group(function () {
     Route::get('{location}/edit', [LocationController::class, 'edit'])->name('edit');
     Route::put('{location}', [LocationController::class, 'update'])->name('update');
     Route::delete('{location}', [LocationController::class, 'destroy'])->name('destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Report Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('events/{event}/reports')->name('reports.')->middleware('auth:sanctum')->group(function () {
+    Route::get('/', [ReportController::class, 'index'])->name('index');
+    Route::post('/', [ReportController::class, 'store'])->name('store');
+    Route::delete('{report}', [ReportController::class, 'destroy'])->name('destroy');
 });

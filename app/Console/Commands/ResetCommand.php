@@ -43,9 +43,11 @@ class ResetCommand extends Command
 
         $this->resetDatabase();
         $this->resetStorage();
-        $this->resetEnv();
+        $this->deleteEnv();
 
-        $this->info('>> Done');
+        $this->info('>> Application in initial state..');
+
+        $this->call('sportr:setup');
 
         return 0;
     }
@@ -76,7 +78,7 @@ class ResetCommand extends Command
      *
      * @return void
      */
-    protected function resetEnv()
+    protected function deleteEnv()
     {
         unlink('.env');
     }
