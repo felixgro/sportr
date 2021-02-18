@@ -11,10 +11,12 @@ class ReportTest extends TestCase
 	/** @test */
 	public function guests_cannot_interact_with_reports()
 	{
-		$this->get(route('reports.index'))
+		$event = Event::factory()->create();
+
+		$this->get(route('reports.index', $event))
 			->assertRedirect(route('login'));
 
-		$this->post(route('reports.store'))
+		$this->post(route('reports.store', $event))
 			->assertRedirect(route('login'));
 	}
 
