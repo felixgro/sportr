@@ -2,88 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
-use App\Models\Report;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\{Event, Report};
+use Facades\App\Services\ReportService;
+use App\Http\Requests\Report\CreateReport;
 
 class ReportController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get all reports of given event.
      *
      * @param  \App\Models\Event
      * @return \Illuminate\Http\Response
      */
     public function index(Event $event)
     {
-        return $event->reports;
+        return response()
+            ->json($event->reports);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created report.
      *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Report\CreateReport  $request
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, Event $event)
+    public function store(CreateReport $request, Event $event)
     {
-        $event->reports()->create([
-            'subject' => $request->get('subject'),
-            'description' => $request->get('description'),
-            'user_id' => Auth::user()->id
-        ]);
+        ReportService::forEvent($event)
+            ->store($request->validated());
 
         return redirect()->back();
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Report  $report
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Report $report)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Report  $report
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Report $report)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Report  $report
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Report $report)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
+     * Delete report permanently from database.
      *
      * @param  \App\Models\Event  $event
      * @param  \App\Models\Report  $report
@@ -91,6 +44,8 @@ class ReportController extends Controller
      */
     public function destroy(Event $event, Report $report)
     {
+        $this->authorize('edit-report');
+
         $report->delete();
 
         return redirect()->back();
