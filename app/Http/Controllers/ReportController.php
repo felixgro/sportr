@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Event, Report};
-use Facades\App\Services\ReportService;
 use App\Http\Requests\Report\CreateReport;
+use App\Models\Event;
+use App\Models\Report;
+use Facades\App\Services\ReportService;
 
 class ReportController extends Controller
 {
