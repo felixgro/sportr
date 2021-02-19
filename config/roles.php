@@ -26,7 +26,7 @@ return [
     | Sport:  edit-sport / delete-sport
     | Teams:  edit-team  / delete-team
     | Events: remember-event / edit-event / delete-event
-    | Other:  assign-role / view-dashboard
+    | Other:  assign-role / edit-report / view-dashboard
     */
 
     'all' => [
@@ -43,6 +43,7 @@ return [
                 'edit-sport',
                 'edit-team',
                 'edit-event',
+                'edit-report',
                 'delete-event'
             ]
         ],
