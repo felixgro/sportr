@@ -3,81 +3,92 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
 class ResetCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'sportr:reset';
+	/**
+	 * The name and signature of the console command.
+	 *
+	 * @var string
+	 */
+	protected $signature = 'sportr:reset';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Rollback all database migrations, clear application storage and delete the .env file.';
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = 'Rollback all database migrations, clear application storage and delete the .env file.';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+	/**
+	 * Create a new command instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
-    {
-        $this->info('>> Resetting Sportr..');
+	/**
+	 * Execute the console command.
+	 *
+	 * @return int
+	 */
+	public function handle()
+	{
+		$this->info('>> Resetting Sportr');
 
-        $this->resetDatabase();
-        $this->resetStorage();
-        $this->deleteEnv();
+		try {
+			$this->resetDatabase();
+		} catch (QueryException $e) {
+			if ($e->errorInfo[1] === 2002) {
+				$this->warn('<mysql> Could not find the specified database.');
+			}
+		}
 
-        $this->info('>> Application in initial state..');
+		$this->resetStorage();
+		$this->deleteEnv();
 
-        return 0;
-    }
+		$this->info('>> Sportr in initial state..');
 
-    /**
-     * Drops all existing database tables.
-     *
-     * @return void
-     */
-    protected function resetDatabase()
-    {
-        $this->call('migrate:reset');
-        Schema::dropIfExists('migrations');
-    }
+		return 0;
+	}
 
-    /**
-     * Deletes all sport icons in public storage.
-     *
-     * @return void
-     */
-    protected function resetStorage()
-    {
-        Storage::disk('public')->deleteDirectory('icons');
-    }
+	/**
+	 * Drops all existing database tables.
+	 *
+	 * @return void
+	 */
+	protected function resetDatabase()
+	{
+		$this->call('migrate:reset');
+		Schema::dropIfExists('migrations');
+	}
 
-    /**
-     * Deletes .env file.
-     *
-     * @return void
-     */
-    protected function deleteEnv()
-    {
-        unlink('.env');
-    }
+	/**
+	 * Deletes all sport icons in public storage.
+	 *
+	 * @return void
+	 */
+	protected function resetStorage()
+	{
+		exec('rm -rf public/storage');
+		Storage::disk('public')->deleteDirectory('icons');
+	}
+
+	/**
+	 * Deletes .env file.
+	 *
+	 * @return void
+	 */
+	protected function deleteEnv()
+	{
+		if (file_exists('.env')) {
+			unlink('.env');
+		}
+	}
 }

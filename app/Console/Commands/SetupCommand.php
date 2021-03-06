@@ -2,10 +2,12 @@
 
 namespace App\Console\Commands;
 
+use Exception;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\SportSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Console\Command;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
 class SetupCommand extends Command
@@ -46,30 +48,38 @@ class SetupCommand extends Command
 		$this->copyEnv();
 		$this->generateKey();
 
-		$dbCreds = null;
+		$updatedEnv = null;
 
-		if ($this->confirm('Do you want to setup the .env interactively?', true)) {
-			$dbCreds = $this->requestDatabaseCredentials();
-			$this->updateEnv($dbCreds);
+		if ($this->confirm('Is sportr currently running on docker?')) {
+			$updatedEnv = ['DB_HOST' => 'mysql'];
 		} else {
-			$this->warn('Make sure the database in your .env file is configured correctly before migrating.');
+			if ($this->confirm('Do you want to setup the .env interactively?', true)) {
+				$updatedEnv = $this->requestDatabaseCredentials();
+			}
 		}
 
-		if ($this->confirm('Do you want to migrate the given database?', true)) {
-			$this->migrateDatabase($dbCreds);
-		}
+		$this->updateEnv($updatedEnv);
 
-		if ($this->databaseIsMigrated()) {
+		try {
+			// TODO Map updatedEnv to contain only DB_* variables.
+			$this->migrateDatabase($updatedEnv);
+
 			$this->storeRoles();
 			$this->storeSports();
 			$this->storeAdminUser();
-		} else {
-			return $this->error('Your database needs to be migrated for the next steps.');
+		} catch (QueryException $e) {
+			if ($e->errorInfo[1] === 2002) {
+				return $this->error('>> Cannot find the specified mysql database.');
+			}
 		}
 
 		$this->call('cache:clear');
 
-		$this->call('storage:link');
+		try {
+			$this->call('storage:link');
+		} catch (Exception $e) {
+			$this->warn('>> Could not run `php artisan storage:link` command.');
+		}
 
 		$this->info('>> Sportr is ready! Have fun :)');
 
@@ -113,7 +123,7 @@ class SetupCommand extends Command
 	protected function requestDatabaseCredentials()
 	{
 		return [
-			'DB_HOST' => $this->ask('Database host (set to \'mysql\' if using docker-compose)', '127.0.0.1'),
+			'DB_HOST' => $this->ask('Database host', '127.0.0.1'),
 			'DB_DATABASE' => $this->ask('Database name', 'sportr'),
 			'DB_PORT' => $this->ask('Database port', 3306),
 			'DB_USERNAME' => $this->ask('Database user', 'root'),
