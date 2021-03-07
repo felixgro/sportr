@@ -56,6 +56,8 @@ class SetupLocalCommand extends Command
 			}
 		}
 
+		$this->call('db:make');
+
 		try {
 			$this->migrateDatabase($updatedEnv ?? null);
 			$this->seedDatabase();
