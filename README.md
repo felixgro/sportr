@@ -18,13 +18,10 @@ Built on Laravel 8, InteriaJs and VueJs.
 git clone https://github.com/felixgro/sportr.git
 cd sportr && composer install && npm install && npm run dev
 ```
-2. Start a convenient terminal setup process:
+2. Start a convenient terminal setup process by running one of the following commands:
 ```
-php artisan sportr:setup
-```
-3. Serve Sportr using [Valet](https://laravel.com/docs/8.x/valet) or run:
-```
-php artisan serve
+php artisan setup:local  // Setup Sportr on your system
+php artisan setup:docker // Setup Sportr on docker
 ```
 
 Check out the [Setup Guide](docs/SetupGuide.md) for detailed instructions on how to manually setup Sportr on your machine.
