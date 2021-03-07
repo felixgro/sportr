@@ -2,19 +2,23 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Traits\DatabaseEditor;
+use App\Console\Traits\EnvEditor;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
-class ResetCommand extends Command
+class SetupUndoCommand extends Command
 {
+    use EnvEditor;
+    use DatabaseEditor;
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sportr:reset';
+    protected $signature = 'setup:undo';
 
     /**
      * The console command description.
@@ -40,33 +44,20 @@ class ResetCommand extends Command
      */
     public function handle()
     {
-        $this->info('>> Resetting Sportr');
+        $this->info('>> Resetting Sportr to it`s initial state.');
 
         try {
             $this->resetDatabase();
         } catch (QueryException $e) {
-            if ($e->errorInfo[1] === 2002) {
-                $this->warn('<mysql> Could not find the specified database.');
-            }
+            $this->printQueryException($e);
         }
 
         $this->resetStorage();
         $this->deleteEnv();
 
-        $this->info('>> Sportr in initial state..');
+        $this->info('>> Sportr in initial state.');
 
         return 0;
-    }
-
-    /**
-     * Drops all existing database tables.
-     *
-     * @return void
-     */
-    protected function resetDatabase()
-    {
-        $this->call('migrate:reset');
-        Schema::dropIfExists('migrations');
     }
 
     /**
@@ -74,21 +65,9 @@ class ResetCommand extends Command
      *
      * @return void
      */
-    protected function resetStorage()
+    private function resetStorage()
     {
         exec('rm -rf public/storage');
         Storage::disk('public')->deleteDirectory('icons');
-    }
-
-    /**
-     * Deletes .env file.
-     *
-     * @return void
-     */
-    protected function deleteEnv()
-    {
-        if (file_exists('.env')) {
-            unlink('.env');
-        }
     }
 }
