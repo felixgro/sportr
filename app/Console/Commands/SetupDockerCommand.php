@@ -3,82 +3,94 @@
 namespace App\Console\Commands;
 
 use App\Console\Traits\DatabaseEditor;
+use App\Console\Traits\DockerLogger;
 use App\Console\Traits\EnvEditor;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 
 class SetupDockerCommand extends Command
 {
-    use EnvEditor;
-    use DatabaseEditor;
+	use EnvEditor;
+	use DatabaseEditor;
+	use DockerLogger;
 
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'setup:docker';
+	/**
+	 * The name and signature of the console command.
+	 *
+	 * @var string
+	 */
+	protected $signature = 'setup:docker';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Prepares Sportr to run properly on docker.';
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = 'Prepares Sportr to run properly on docker.';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+	/**
+	 * Create a new command instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
-    {
-        $this->info('>> Setting up Sportr on docker..');
-        $this->setupEnv();
+	/**
+	 * Execute the console command.
+	 *
+	 * @return int
+	 */
+	public function handle()
+	{
+		$this->info('>> Setting up Sportr on docker..');
+		$this->setupEnv();
 
-        $mysql = [
-            'DB_HOST' => 'mysql'
-        ];
+		$this->updateEnv(['DB_HOST' => 'mysql']);
 
-        $this->updateEnv($mysql);
+		$this->dockerLog('creating volumes..');
+		exec('docker volume create sportr_sailmysql');
+		exec('docker volume create sportr_sailredis');
+		$this->dockerSuccess('done!');
 
-        exec('docker volume create sportr_sailmysql');
-        exec('docker volume create sportr_sailredis');
+		$this->dockerLog('building containers..');
+		exec('vendor/bin/sail up --d');
+		$this->dockerSuccess('done!');
 
-        exec('vendor/bin/sail up --d');
+		try {
+			$this->dockerLog('create databases..');
+			exec('vendor/bin/sail artisan db:make');
+			sleep(10);
+			$this->dockerSuccess('done!');
 
-        try {
-            exec('vendor/bin/sail artisan db:make');
-            sleep(10);
-            ray(exec('vendor/bin/sail artisan migrate'));
-            exec('vendor/bin/sail artisan db:seed');
-        } catch (QueryException $e) {
-            $this->printQueryException($e);
+			$this->dockerLog('migrate database..');
+			exec('vendor/bin/sail artisan migrate');
+			$this->dockerSuccess('done!');
 
-            return 1;
-        }
+			$this->dockerLog('seed database with essential data..');
+			exec('vendor/bin/sail artisan db:seed');
+			$this->dockerSuccess('done!');
+		} catch (QueryException $e) {
+			$this->printQueryException($e);
 
-        exec('vendor/bin/sail artisan cache:clear');
+			return 1;
+		}
 
-        try {
-            exec('vendor/bin/sail artisan storage:link');
-        } catch (\Exception $e) {
-            $this->warn('>> Could not assign storage links.');
-        }
+		exec('vendor/bin/sail artisan cache:clear');
+		$this->dockerSuccess('done!');
 
-        $this->info('>> Sportr is running on docker! Have fun :)');
-        $this->comment('>> Container listening on `http://localhost:80`.');
+		try {
+			exec('vendor/bin/sail artisan storage:link');
+			$this->dockerSuccess('done!');
+		} catch (\Exception $e) {
+			$this->warn('>> Could not assign storage links.');
+		}
 
-        return 0;
-    }
+		$this->info('>> Sportr is running on docker! Have fun :)');
+		$this->comment('>> Container listening on `http://localhost:80`.');
+
+		return 0;
+	}
 }
