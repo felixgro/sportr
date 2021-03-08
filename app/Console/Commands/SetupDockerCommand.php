@@ -60,16 +60,16 @@ class SetupDockerCommand extends Command
 		$this->dockerSuccess('done!');
 
 		try {
-			$this->dockerLog('create databases..');
+			$this->dockerLog('creating databases..');
 			exec('vendor/bin/sail artisan db:make');
 			sleep(10);
 			$this->dockerSuccess('done!');
 
-			$this->dockerLog('migrate database..');
+			$this->dockerLog('migrating main database..');
 			exec('vendor/bin/sail artisan migrate');
 			$this->dockerSuccess('done!');
 
-			$this->dockerLog('seed database with essential data..');
+			$this->dockerLog('seeding main database with essential data..');
 			exec('vendor/bin/sail artisan db:seed');
 			$this->dockerSuccess('done!');
 		} catch (QueryException $e) {
@@ -79,13 +79,13 @@ class SetupDockerCommand extends Command
 		}
 
 		exec('vendor/bin/sail artisan cache:clear');
-		$this->dockerSuccess('done!');
+		$this->dockerSuccess('application cache cleared!');
 
 		try {
 			exec('vendor/bin/sail artisan storage:link');
-			$this->dockerSuccess('done!');
+			$this->dockerSuccess('linked storage to public/ directory!');
 		} catch (\Exception $e) {
-			$this->warn('>> Could not assign storage links.');
+			$this->warn('>> Could not link storage directory.');
 		}
 
 		$this->info('>> Sportr is running on docker! Have fun :)');

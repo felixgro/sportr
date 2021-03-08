@@ -33,7 +33,6 @@ Run the test suite using one of the following commands:
 ```
 composer test
 php artisan test
-vendor/bin/phpunit
 ```
 
 Pull-Requests get automatically built and tested by [Travis-CI](https://www.travis-ci.com).
