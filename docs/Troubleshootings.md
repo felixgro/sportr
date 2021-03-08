@@ -6,8 +6,8 @@ No solution for your problem? Feel free to send an email to [me@felixgrohs.at](m
 ### Public storage
 If you receive a `404 Not Found Error` when requesting assets from the client-side you might have to reset and re-setup your application using the following 2 commands:
 ```
-php artisan sportr:reset
-php artisan sportr:setup
+php artisan setup:undo
+php artisan setup:local
 ```
 Make sure you don't rollback your migrations manually to prevent this specific error.
 
