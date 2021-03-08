@@ -4,20 +4,20 @@ namespace App\Console\Traits;
 
 trait MysqlLogger
 {
-	private $prefix = '<mysql>';
+    private $prefix = '<mysql>';
 
-	protected function mysqlLog($msg)
-	{
-		$this->comment("{$this->prefix} {$msg}");
-	}
+    protected function mysqlLog($msg)
+    {
+        $this->comment("{$this->prefix} {$msg}");
+    }
 
-	protected function mysqlSuccess($msg)
-	{
-		$this->info("{$this->prefix} {$msg}");
-	}
+    protected function mysqlSuccess($msg)
+    {
+        $this->info("{$this->prefix} {$msg}");
+    }
 
-	protected function mysqlError($msg)
-	{
-		$this->error("{$this->prefix} {$msg}");
-	}
+    protected function mysqlError($msg)
+    {
+        $this->error("{$this->prefix} {$msg}");
+    }
 }
